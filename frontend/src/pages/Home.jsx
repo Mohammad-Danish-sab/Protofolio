@@ -66,6 +66,12 @@ export default function Home() {
       desc: "It is a full-stack application that tracks the real-time location of the International Space Station (ISS). It uses FastAPI for the backend to fetch ISS data from a public API and React.js for the frontend to display the position on an interactive map with live updates and basic space-tracking information. ",
       tech: ["React", "Tailwind", "FastAPI", "Framer Motion"],
     },
+
+    {
+      title: "Kids Protol",
+      desc: "It is a full-stack application that uses to teach the Childern, In this Projects We use React for Frontend and Python(FastAPI) for Backend. ",
+      tech: ["React", "Tailwind", "FastAPI", "Framer Motion"],
+    },
   ];
 
   const skills = [
