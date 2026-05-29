@@ -10,9 +10,9 @@ export default function BentoCard({ children, className = "" }) {
         duration: 0.35,
       }}
       className={`
-      rounded-[32px]
+      rounded-4xl
       border border-white/10
-      bg-white/[0.03]
+      bg-white/3
       backdrop-blur-2xl
       overflow-hidden
       relative

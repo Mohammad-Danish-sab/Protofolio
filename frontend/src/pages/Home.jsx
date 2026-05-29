@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import { motion } from "framer-motion";
 
 import profileImg from "../assets/Images/img1.jpeg";
@@ -13,46 +12,12 @@ import {
   FaArrowRight,
   FaDownload,
   FaCode,
-  FaExternalLinkAlt,
   FaEnvelope,
 } from "react-icons/fa";
 
 import { SiMongodb, SiMysql, SiFastapi, SiTailwindcss } from "react-icons/si";
 
 import { TypeAnimation } from "react-type-animation";
-
-function BentoCard({ children, className = "" }) {
-  return (
-    <motion.div
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.35 }}
-      className={`
-      rounded-4xl
-      border border-white/10
-      bg-white/3
-      backdrop-blur-2xl
-      overflow-hidden
-      relative
-      group
-      hover:border-cyan-400/20
-      hover:shadow-[0_0_60px_rgba(34,211,238,0.12)]
-      transition-all duration-500
-      ${className}
-      `}
-    >
-      <div
-        className="
-        absolute inset-0 opacity-0
-        group-hover:opacity-100
-        transition-all duration-500
-        bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.12),transparent_40%)]
-        "
-      />
-
-      {children}
-    </motion.div>
-  );
-}
 
 export default function Home() {
   const [position, setPosition] = useState({
@@ -75,6 +40,60 @@ export default function Home() {
     };
   }, []);
 
+  const projects = [
+    {
+      title: "Insurance AI Platform",
+      desc: "AI-powered insurance premium prediction platform using machine learning and analytics.",
+      tech: ["React", "FastAPI", "MongoDB"],
+    },
+
+    {
+      title: "Premium E-Commerce",
+      desc: "Modern ecommerce application with futuristic UI and scalable backend architecture.",
+      tech: ["React", "Node.js", "MongoDB"],
+    },
+
+    {
+      title: "Patient Doctor API",
+      desc: "Using Python(FastAPI) to make the Patient Docotr API",
+      tech: ["FastAPI"],
+    },
+
+    {
+      title: "ISS-TRACKER-PROJECT",
+      desc: "It is a full-stack application that tracks the real-time location of the International Space Station (ISS). It uses FastAPI for the backend to fetch ISS data from a public API and React.js for the frontend to display the position on an interactive map with live updates and basic space-tracking information. ",
+      tech: ["React", "Tailwind", "FastAPI", "Framer Motion"],
+    },
+  ];
+
+  const skills = [
+    {
+      name: "Frontend Development",
+      value: "95%",
+    },
+
+    {
+      name: "Backend Development",
+      value: "88%",
+    },
+
+    {
+      name: "React",
+      value: "96%",
+    },
+
+    {
+      name: "AI + FastAPI",
+      value: "84%",
+    },
+  ];
+
+  const services = [
+    "Frontend Development",
+    "Backend Development",
+    "AI",
+  ];
+
   return (
     <section
       id="home"
@@ -86,6 +105,7 @@ export default function Home() {
       overflow-hidden
       "
     >
+
       <div
         className="pointer-events-none fixed inset-0 z-0"
         style={{
@@ -99,16 +119,27 @@ export default function Home() {
         }}
       />
 
+
       <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(to_right,#06b6d4_1px,transparent_1px),linear-gradient(to_bottom,#06b6d4_1px,transparent_1px)] bg-size-[65px_65px]" />
 
       <div className="absolute top-0 left-0 w-125 h-125 bg-cyan-500/10 blur-[150px] rounded-full" />
 
       <div className="absolute bottom-0 right-0 w-125 h-125 bg-teal-500/10 blur-[150px] rounded-full" />
 
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
-
-          <BentoCard className="p-7 min-h-92 flex flex-col justify-between">
+          <motion.div
+            whileHover={{ y: -6 }}
+            className="
+            rounded-4xl
+            border border-white/10
+            bg-white/3
+            backdrop-blur-2xl
+            p-7
+            flex flex-col justify-between
+            "
+          >
             <div>
               <p className="text-zinc-400 text-sm tracking-wide">
                 Full Stack Developer
@@ -139,8 +170,6 @@ export default function Home() {
                   border-[5px]
                   border-cyan-400
                   shadow-[0_0_60px_rgba(34,211,238,0.35)]
-                  hover:scale-105
-                  duration-500
                   "
                 />
               </div>
@@ -196,23 +225,55 @@ export default function Home() {
                 <FaArrowRight />
               </button>
             </div>
-          </BentoCard>
+          </motion.div>
 
-
-          <BentoCard className="h-45 flex flex-col items-center justify-center">
+          <motion.div
+            whileHover={{ y: -6 }}
+            className="
+            rounded-4xl
+            border border-white/10
+            bg-white/3
+            backdrop-blur-2xl
+            h-52
+            flex flex-col items-center justify-center
+            "
+          >
             <FaGithub className="text-6xl" />
 
             <p className="mt-5 text-zinc-400">Open Source Projects</p>
-          </BentoCard>
+          </motion.div>
 
-          <BentoCard className="h-45 flex flex-col items-center justify-center">
+          {/* SMALL CARD */}
+
+          <motion.div
+            whileHover={{ y: -6 }}
+            className="
+            rounded-4xl
+            border border-white/10
+            bg-white/3
+            backdrop-blur-2xl
+            h-52
+            flex flex-col items-center justify-center
+            "
+          >
             <FaCode className="text-6xl text-cyan-400" />
 
             <p className="mt-5 text-zinc-400">Clean Modern UI</p>
-          </BentoCard>
+          </motion.div>
 
-
-          <BentoCard className="xl:col-span-2 p-8 md:p-10 min-h-92 overflow-hidden">
+          <motion.div
+            whileHover={{ y: -6 }}
+            className="
+            xl:col-span-2
+            rounded-4xl
+            border border-white/10
+            bg-white/3
+            backdrop-blur-2xl
+            p-8 md:p-10
+            overflow-hidden
+            relative
+            "
+          >
             <div className="absolute right-8 top-8 hidden xl:flex flex-col gap-4">
               <div className="floating-tech">
                 <FaReact className="text-cyan-400" />
@@ -291,7 +352,6 @@ export default function Home() {
                 font-semibold
                 hover:scale-105
                 transition-all duration-300
-                shadow-[0_0_40px_rgba(34,211,238,0.35)]
                 "
               >
                 <span className="flex items-center gap-3">
@@ -317,11 +377,243 @@ export default function Home() {
                 </span>
               </button>
             </div>
-          </BentoCard>
+          </motion.div>
         </div>
       </div>
 
-      <style jsx>{`
+      <div
+        id="projects"
+        className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pb-10"
+      >
+        <div className="text-center">
+          <p className="text-cyan-400 uppercase tracking-[5px] text-sm">
+            Portfolio
+          </p>
+
+          <h2 className="text-5xl md:text-6xl font-black mt-5">
+            Featured Projects
+          </h2>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-6 mt-16">
+          {projects.map((project, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ y: -8 }}
+              className="
+              rounded-4xl
+              border border-white/10
+              bg-white/3
+              overflow-hidden
+              "
+            >
+              <div
+                className="
+                h-64
+                bg-linear-to-br
+                from-cyan-500/20
+                to-teal-500/10
+                "
+              />
+
+              <div className="p-8">
+                <h3 className="text-3xl font-black">{project.title}</h3>
+
+                <p className="text-zinc-400 leading-8 mt-5">{project.desc}</p>
+
+                <div className="flex flex-wrap gap-3 mt-7">
+                  {project.tech.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="
+                      px-4 py-2
+                      rounded-full
+                      text-sm
+                      bg-white/5
+                      border border-white/10
+                      "
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <div
+        id="skills"
+        className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-20"
+      >
+        <div className="text-center">
+          <p className="text-cyan-400 uppercase tracking-[5px] text-sm">
+            Expertise
+          </p>
+
+          <h2 className="text-5xl md:text-6xl font-black mt-5">
+            Technical Skills
+          </h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6 mt-16">
+          {skills.map((skill, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ y: -6 }}
+              className="
+              rounded-4xl
+              border border-white/10
+              bg-white/3
+              p-8
+              "
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-2xl font-bold">{skill.name}</h3>
+
+                <span className="text-cyan-400 font-semibold">
+                  {skill.value}
+                </span>
+              </div>
+
+              <div className="h-3 rounded-full bg-white/5 mt-6 overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  whileInView={{ width: skill.value }}
+                  transition={{ duration: 1 }}
+                  className="
+                  h-full
+                  rounded-full
+                  bg-linear-to-r
+                  from-cyan-500
+                  to-teal-500
+                  "
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <div
+        id="services"
+        className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-24"
+      >
+        <div className="text-center">
+          <p className="text-cyan-400 uppercase tracking-[5px] text-sm">
+            Services
+          </p>
+
+          <h2 className="text-5xl md:text-6xl font-black mt-5">What I Offer</h2>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-6 mt-16">
+          {services.map((service, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ y: -8 }}
+              className="
+              rounded-4xl
+              border border-white/10
+              bg-white/3
+              p-8
+              text-center
+              "
+            >
+              <div
+                className="
+                w-24 h-24
+                rounded-[28px]
+                bg-linear-to-br
+                from-cyan-500
+                to-teal-500
+                mx-auto
+                flex items-center justify-center
+                text-4xl
+                "
+              >
+                ⚡
+              </div>
+
+              <h3 className="text-3xl font-black mt-8">{service}</h3>
+
+              <p className="text-zinc-400 leading-8 mt-5">
+                Creating scalable futuristic digital experiences with modern
+                development technologies.
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <div
+        id="contact"
+        className="relative z-10 max-w-6xl mx-auto px-4 md:px-6 pt-24"
+      >
+        <div
+          className="
+          rounded-[40px]
+          border border-white/10
+          bg-white/3
+          p-10 md:p-16
+          text-center
+          "
+        >
+          <p className="text-cyan-400 uppercase tracking-[5px] text-sm">
+            Contact
+          </p>
+
+          <h2 className="text-5xl md:text-6xl font-black mt-5">
+            Let’s Build Something Amazing
+          </h2>
+
+          <p className="text-zinc-400 leading-8 max-w-2xl mx-auto mt-8 text-lg">
+            Open for internships, freelance work and exciting collaborations in
+            AI systems and full-stack development.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-5 mt-12">
+            <button
+              className="
+              px-8 py-4
+              rounded-2xl
+              bg-linear-to-r
+              from-cyan-500
+              to-teal-500
+              font-semibold
+              "
+            >
+              Hire Me
+            </button>
+
+            <button
+              className="
+              px-8 py-4
+              rounded-2xl
+              border border-white/10
+              bg-white/5
+              "
+            >
+              Contact Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <footer className="relative z-10 pt-24 pb-10 text-center">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="h-px bg-white/10 mb-10" />
+
+          <h3 className="text-3xl font-black gradient-text">CodeWith Danish</h3>
+
+          <p className="text-zinc-500 mt-5">© 2026 All Rights Reserved.</p>
+        </div>
+      </footer>
+
+      {/* CSS */}
+
+      <style>{`
         .gradient-text {
           background: linear-gradient(to right, #22d3ee, #14b8a6);
           -webkit-background-clip: text;
@@ -332,8 +624,8 @@ export default function Home() {
           width: 48px;
           height: 48px;
           border-radius: 18px;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(255,255,255,0.05);
+          border: 1px solid rgba(255,255,255,0.1);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -350,8 +642,8 @@ export default function Home() {
           width: 65px;
           height: 65px;
           border-radius: 24px;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(255,255,255,0.05);
+          border: 1px solid rgba(255,255,255,0.08);
           backdrop-filter: blur(20px);
           display: flex;
           align-items: center;
