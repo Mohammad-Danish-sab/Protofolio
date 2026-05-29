@@ -19,6 +19,8 @@ import { SiMongodb, SiMysql, SiFastapi, SiTailwindcss } from "react-icons/si";
 
 import { TypeAnimation } from "react-type-animation";
 
+import { projects, skills, services } from "../utils/data";
+
 export default function Home() {
   const [position, setPosition] = useState({
     x: 0,

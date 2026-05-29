@@ -1,6 +1,6 @@
 import { useState } from "react";
-
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 import { FaGithub, FaLinkedin, FaCode, FaArrowRight } from "react-icons/fa";
 
@@ -9,7 +9,13 @@ import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const navItems = ["Home", "Projects", "Skills", "Services", "Contact"];
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "Projects", path: "/projects" },
+    { name: "Skills", path: "/skills" },
+    { name: "Services", path: "/services" },
+    { name: "Contact", path: "/contact" },
+  ];
 
   return (
     <>
@@ -30,7 +36,7 @@ export default function Navbar() {
         <div
           className="
           backdrop-blur-2xl
-          bg-white/4
+          bg-white/5
           border border-white/10
           rounded-[28px]
           px-6 lg:px-8
@@ -39,12 +45,8 @@ export default function Navbar() {
           "
         >
           <div className="flex items-center justify-between">
-
-            <motion.a
-              href="#home"
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-4 cursor-pointer"
-            >
+            {/* LOGO */}
+            <Link to="/" className="flex items-center gap-4 cursor-pointer">
               <div
                 className="
                 w-12 h-12
@@ -82,14 +84,13 @@ export default function Navbar() {
                   Full Stack Developer
                 </span>
               </div>
-            </motion.a>
-
+            </Link>
 
             <ul className="hidden lg:flex items-center gap-10">
               {navItems.map((item, i) => (
                 <li key={i}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
+                  <Link
+                    to={item.path}
                     className="
                     text-zinc-300
                     hover:text-cyan-400
@@ -98,18 +99,16 @@ export default function Navbar() {
                     uppercase
                     tracking-[2px]
                     font-medium
-                    relative
                     "
                   >
-                    {item}
-                  </a>
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
 
-
             <div className="flex items-center gap-4">
-
+              {/* SOCIAL */}
               <div className="hidden md:flex items-center gap-3">
                 <a
                   href="https://github.com/Mohammad-Danish-sab"
@@ -131,12 +130,8 @@ export default function Navbar() {
               </div>
 
               <motion.button
-                whileHover={{
-                  scale: 1.05,
-                }}
-                whileTap={{
-                  scale: 0.95,
-                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className="
                 hidden md:flex
                 items-center
@@ -154,7 +149,6 @@ export default function Navbar() {
                 Hire Me
                 <FaArrowRight />
               </motion.button>
-
 
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -175,7 +169,6 @@ export default function Navbar() {
           </div>
         </div>
       </motion.nav>
-
 
       <AnimatePresence>
         {menuOpen && (
@@ -207,8 +200,8 @@ export default function Navbar() {
               <ul className="flex flex-col gap-6">
                 {navItems.map((item, i) => (
                   <li key={i}>
-                    <a
-                      href={`#${item.toLowerCase()}`}
+                    <Link
+                      to={item.path}
                       onClick={() => setMenuOpen(false)}
                       className="
                       block
@@ -220,8 +213,8 @@ export default function Navbar() {
                       text-sm
                       "
                     >
-                      {item}
-                    </a>
+                      {item.name}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -247,9 +240,7 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* STYLE */}
-
-      <style jsx>{`
+      <style>{`
         .nav-social {
           width: 44px;
           height: 44px;

@@ -8,35 +8,29 @@ body {
   background: #070707;
   color: white;
   overflow-x: hidden;
-}
-
-.card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(24px);
+  font-family: sans-serif;
 }
 
 .gradient-text {
-  background: linear-gradient(to right,#22d3ee,#14b8a6);
+  background: linear-gradient(to right, #22d3ee, #14b8a6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.hover-card {
-  transition: 0.4s ease;
-}
-
-.hover-card:hover {
-  transform: translateY(-6px);
 }
 
 .social-btn {
   width: 48px;
   height: 48px;
   border-radius: 18px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.3s ease;
+}
+
+.social-btn:hover {
+  background: #22d3ee;
+  color: black;
+  transform: translateY(-4px);
 }
