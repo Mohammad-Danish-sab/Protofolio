@@ -1,16 +1,12 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import heroImg from "./assets/hero.png";
-import "./App.css";
-function App() {
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+
+export default function App() {
   return (
-    <div className="h-screen bg-black flex items-center justify-center">
-      <h1 className="text-6xl font-bold text-orange-500">
-        Portfolio Started 🚀
-      </h1>
+    <div className="bg-[#020617] text-white min-h-screen overflow-x-hidden">
+      <Navbar />
+
+      <Home />
     </div>
   );
 }
-
-export default App;
