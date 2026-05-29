@@ -243,7 +243,6 @@ export default function Home() {
             <p className="mt-5 text-zinc-400">Open Source Projects</p>
           </motion.div>
 
-          {/* SMALL CARD */}
 
           <motion.div
             whileHover={{ y: -6 }}
