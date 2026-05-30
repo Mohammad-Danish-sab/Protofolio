@@ -18,8 +18,9 @@ const projects = [
       "Authentication",
       "Responsive Design",
     ],
-    github: "https://github.com/your-github",
-    live: "#",
+    github:
+      "https://github.com/Mohammad-Danish-sab/insurence-premium-predictor.git",
+    live: "https://insurence-premium-predictor.vercel.app/",
   },
 
   {
@@ -34,10 +35,9 @@ const projects = [
       "Authentication",
       "Responsive Design",
     ],
-    github: "https://github.com/your-github",
+    github: "https://github.com/Mohammad-Danish-sab/E--commerce.git",
     live: "#",
   },
-
 
   {
     title: "ISS Tracker Project",
@@ -51,7 +51,7 @@ const projects = [
       "API Integration",
       "Live Updates",
     ],
-    github: "https://github.com/your-github",
+    github: "https://github.com/Mohammad-Danish-sab/ISS-TRACKER-PROJECT.git",
     live: "#",
   },
 
