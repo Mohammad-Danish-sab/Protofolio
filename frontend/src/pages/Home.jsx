@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 
 import profileImg from "../assets/Images/img1.jpeg";
 
+import insuranceImg from "../assets/Images/insurance.png";
+import ecommerceImg from "../assets/Images/ecommerce.png";
+
 import {
   FaGithub,
   FaLinkedin,
@@ -42,37 +45,21 @@ export default function Home() {
     };
   }, []);
 
-  const projects = [
-    {
-      title: "Insurance AI Platform",
-      desc: "AI-powered insurance premium prediction platform using machine learning and analytics.",
-      tech: ["React", "FastAPI", "MongoDB"],
-    },
+ const projects = [
+   {
+     title: "Insurance AI Platform",
+     image: insuranceImg,
+     desc: "AI-powered insurance premium prediction platform.",
+     tech: ["React", "FastAPI", "MongoDB"],
+   },
 
-    {
-      title: "Premium E-Commerce",
-      desc: "Modern ecommerce application with futuristic UI and scalable backend architecture.",
-      tech: ["React", "Node.js", "MongoDB"],
-    },
-
-    {
-      title: "Patient Doctor API",
-      desc: "Using Python(FastAPI) to make the Patient Docotr API",
-      tech: ["FastAPI"],
-    },
-
-    {
-      title: "ISS-TRACKER-PROJECT",
-      desc: "It is a full-stack application that tracks the real-time location of the International Space Station (ISS). It uses FastAPI for the backend to fetch ISS data from a public API and React.js for the frontend to display the position on an interactive map with live updates and basic space-tracking information. ",
-      tech: ["React", "Tailwind", "FastAPI", "Framer Motion"],
-    },
-
-    {
-      title: "Kids Protol",
-      desc: "It is a full-stack application that uses to teach the Childern, In this Projects We use React for Frontend and Python(FastAPI) for Backend. ",
-      tech: ["React", "Tailwind", "FastAPI", "Framer Motion"],
-    },
-  ];
+   {
+     title: "Premium E-Commerce",
+     image: ecommerceImg,
+     desc: "Modern ecommerce application.",
+     tech: ["React", "Node.js", "MongoDB"],
+   },
+ ];
 
   const skills = [
     {
@@ -137,6 +124,10 @@ export default function Home() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+
+
+        
+        
           <motion.div
             whileHover={{ y: -6 }}
             className="
@@ -414,15 +405,21 @@ export default function Home() {
               overflow-hidden
               "
             >
-              <div
-                className="
-                h-64
-                bg-linear-to-br
-                from-cyan-500/20
-                to-teal-500/10
-                "
-              />
-
+              <div className="h-64 overflow-hidden">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="
+                          w-full
+                          h-full
+                          object-cover
+                          transition-all
+                          duration-500
+                          hover:scale-110
+                        "
+                      />
+                    </div>
+              
               <div className="p-8">
                 <h3 className="text-3xl font-black">{project.title}</h3>
 
@@ -608,17 +605,7 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className="relative z-10 pt-24 pb-10 text-center">
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="h-px bg-white/10 mb-10" />
 
-          <h3 className="text-3xl font-black gradient-text">CodeWith Danish</h3>
-
-          <p className="text-zinc-500 mt-5">© 2026 All Rights Reserved.</p>
-        </div>
-      </footer>
-
-      {/* CSS */}
 
       <style>{`
         .gradient-text {
