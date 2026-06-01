@@ -1,9 +1,12 @@
-export default function About() {
-  return (
-    <div className="min-h-screen pt-32 px-6">
-      <h1 className="text-5xl font-black">Contact Page</h1>
+import { motion } from "framer-motion";
 
-      
-    </div>
-  );
-}
+import {
+  FaGithub,
+  FaLinkedin,
+  FaWhatsapp,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaUser,
+  FaTag,
+  FaCommentDots,
+} from "react-icons/fa";
