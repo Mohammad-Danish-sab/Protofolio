@@ -28,3 +28,20 @@ import {
   </div>
 </div>;
 
+<div className="grid grid-cols-3 gap-4 mb-16">
+  <div className="bg-white/5 border border-white/10 rounded-3xl p-6 text-center">
+    <h3 className="text-3xl font-black text-cyan-400">20+</h3>
+    <p className="text-zinc-400 mt-2">Projects</p>
+  </div>
+
+  <div className="bg-white/5 border border-white/10 rounded-3xl p-6 text-center">
+    <h3 className="text-3xl font-black text-cyan-400">2+</h3>
+    <p className="text-zinc-400 mt-2">Years Learning</p>
+  </div>
+
+  <div className="bg-white/5 border border-white/10 rounded-3xl p-6 text-center">
+    <h3 className="text-3xl font-black text-cyan-400">100%</h3>
+    <p className="text-zinc-400 mt-2">Dedication</p>
+  </div>
+</div>;
+
