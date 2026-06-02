@@ -81,5 +81,43 @@ import {
   </a>
 </div>;
 
+<div className="space-y-6">
+  {[
+    {
+      icon: <FaEnvelope />,
+      title: "Email",
+      value: "danish@example.com",
+    },
+    {
+      icon: <FaWhatsapp />,
+      title: "WhatsApp",
+      value: "+91 9876543210",
+    },
+    {
+      icon: <FaMapMarkerAlt />,
+      title: "Location",
+      value: "India",
+    },
+  ].map((item, index) => (
+    <div
+      key={index}
+      className="
+      flex items-center gap-5
+      p-5
+      rounded-3xl
+      bg-white/5
+      border border-white/10
+      "
+    >
+      <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 text-xl">
+        {item.icon}
+      </div>
 
+      <div>
+        <p className="text-zinc-500">{item.title}</p>
 
+        <h3 className="text-xl font-semibold">{item.value}</h3>
+      </div>
+    </div>
+  ))}
+</div>;
