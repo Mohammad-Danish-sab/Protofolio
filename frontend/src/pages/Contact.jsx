@@ -86,12 +86,12 @@ import {
     {
       icon: <FaEnvelope />,
       title: "Email",
-      value: "danish@example.com",
+      value: "danish.sab05@gmail.com",
     },
     {
       icon: <FaWhatsapp />,
       title: "WhatsApp",
-      value: "+91 9876543210",
+      value: "+91 8294534533",
     },
     {
       icon: <FaMapMarkerAlt />,
@@ -121,3 +121,63 @@ import {
     </div>
   ))}
 </div>;
+
+<div className="flex gap-5 mt-12">
+  <a
+    href="https://github.com/Mohammad-Danish-sab"
+    target="_blank"
+    rel="noreferrer"
+    className="
+    w-16 h-16
+    rounded-3xl
+    bg-linear-to-r
+    from-slate-800
+    to-slate-700
+    flex items-center justify-center
+    text-2xl
+    hover:scale-110
+    transition-all
+    "
+  >
+    <FaGithub />
+  </a>
+
+  <a
+    href="https://www.linkedin.com/in/mohammad-danish14"
+    target="_blank"
+    rel="noreferrer"
+    className="
+    w-16 h-16
+    rounded-3xl
+    bg-linear-to-r
+    from-blue-500
+    to-cyan-500
+    flex items-center justify-center
+    text-2xl
+    hover:scale-110
+    transition-all
+    "
+  >
+    <FaLinkedin />
+  </a>
+
+  <a
+    href="https://wa.me/918294534533"
+    target="_blank"
+    rel="noreferrer"
+    className="
+    w-16 h-16
+    rounded-3xl
+    bg-linear-to-r
+    from-green-500
+    to-emerald-500
+    flex items-center justify-center
+    text-2xl
+    hover:scale-110
+    transition-all
+    "
+  >
+    <FaWhatsapp />
+  </a>
+</div>;
+
