@@ -181,3 +181,19 @@ import {
   </a>
 </div>;
 
+<div className="relative">
+  <FaUser className="absolute left-5 top-5 text-cyan-400" />
+
+  <input
+    type="text"
+    placeholder="Your Name"
+    className="
+    w-full
+    pl-14
+    py-4
+    rounded-2xl
+    bg-black/30
+    border border-white/10
+    "
+  />
+</div>;
