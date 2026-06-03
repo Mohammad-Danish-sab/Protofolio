@@ -1,12 +1,6 @@
-export default function About() {
-  return (
-    <div className="min-h-screen pt-32 px-6">
-      <h1 className="text-5xl font-black">About Me</h1>
+import { motion } from "framer-motion";
+import profileImg from "../assets/Images/img1.jpeg";
 
-      <p className="mt-6 text-zinc-400 max-w-3xl leading-8">
-        I am a Full Stack Developer passionate about modern UI/UX, AI systems,
-        FastAPI, React.js, and scalable backend architectures.
-      </p>
-    </div>
-  );
-}
+import { FaReact, FaNodeJs, FaPython, FaDownload } from "react-icons/fa";
+
+import { SiFastapi, SiMongodb, SiTailwindcss } from "react-icons/si";
