@@ -1,9 +1,23 @@
 import { motion } from "framer-motion";
-import profileImg from "../assets/Images/img1.jpeg";
 
 import { FaReact, FaNodeJs, FaPython, FaDownload } from "react-icons/fa";
 
 import { SiFastapi, SiMongodb, SiTailwindcss } from "react-icons/si";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+
+import img1 from "../assets/Images/img1.jpeg";
+import img2 from "../assets/Images/img2.jpeg";
+import img3 from "../assets/Images/img3.jpeg";
+import img4 from "../assets/Images/img4.jpeg";
+import img5 from "../assets/Images/img5.jpeg";
+import img6 from "../assets/Images/img6.jpeg";
+import img7 from "../assets/Images/img7.jpeg";
 
 const achievements = [
   { number: "20+", title: "Projects" },
@@ -46,6 +60,8 @@ const techStack = [
   },
 ];
 
+const galleryImages = [img1, img2, img3, img4, img5, img6, img7];
+
 export default function About() {
   return (
     <div className="min-h-screen bg-[#070707] text-white relative overflow-hidden pt-36 pb-20 px-6">
@@ -65,25 +81,81 @@ export default function About() {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <motion.div
-            whileHover={{ scale: 1.02 }}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
             className="
-            rounded-[40px]
-            bg-white/5
-            border border-white/10
-            p-8
-            backdrop-blur-xl
-            "
+             rounded-[40px]
+             bg-white/5
+             border border-cyan-400/20
+             p-5
+             backdrop-blur-xl
+             shadow-[0_0_40px_rgba(6,182,212,0.15)]
+             "
           >
-            <img
-              src={profileImg}
-              alt="profile"
-              className="
-              w-full
-              h-125
-              object-cover
-              rounded-[30px]
-              "
-            />
+            <Swiper
+              modules={[Autoplay, EffectCoverflow, Pagination]}
+              effect="coverflow"
+              centeredSlides={true}
+              slidesPerView={1}
+              loop={true}
+              grabCursor={true}
+              pagination={{
+                clickable: true,
+              }}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              coverflowEffect={{
+                rotate: 10,
+                stretch: 0,
+                depth: 120,
+                modifier: 2,
+                slideShadows: false,
+              }}
+            >
+              {galleryImages.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <div className="relative overflow-hidden rounded-[30px]">
+                    <img
+                      src={image}
+                      alt={`Gallery ${index + 1}`}
+                      className="
+            w-full
+            h-100
+            object-cover
+            rounded-[30px]
+            transition-all
+            duration-500
+            hover:scale-105
+            "
+                    />
+
+                    <div
+                      className="
+            absolute
+            inset-0
+            bg-linear-to-t
+            from-black/60
+            via-transparent
+            to-transparent
+            "
+                    />
+
+                    <div className="absolute bottom-8 left-8">
+                      <h3 className="text-3xl font-bold text-white">
+                        Full Stack Developer
+                      </h3>
+
+                      <p className="text-zinc-300 mt-2">
+                        Building Modern Web Applications
+                      </p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </motion.div>
 
           <motion.div

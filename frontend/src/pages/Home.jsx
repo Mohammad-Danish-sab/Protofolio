@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-import profileImg from "../assets/Images/img1.jpeg";
+import profileImg from "../assets/Images/profile.jpeg";
 
 import insuranceImg from "../assets/Images/insurance.png";
 import ecommerceImg from "../assets/Images/ecommerce.png";
