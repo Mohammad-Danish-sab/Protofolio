@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import profileImg from "../assets/Images/profile.jpeg";
@@ -18,11 +19,25 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 
-import { SiMongodb, SiMysql, SiFastapi, SiTailwindcss } from "react-icons/si";
+import {
+  SiReact,
+  SiNodedotjs,
+  SiJavascript,
+  SiTypescript,
+  SiTailwindcss,
+  SiMongodb,
+  SiDocker,
+  SiPostman,
+  SiGit,
+  SiPostgresql,
+  SiExpress,
+  SiVercel,
+  SiFirebase,
+} from "react-icons/si";
+
+import { VscVscode } from "react-icons/vsc";
 
 import { TypeAnimation } from "react-type-animation";
-
-import { projects, skills, services } from "../utils/data";
 
 export default function Home() {
   const [position, setPosition] = useState({
@@ -45,21 +60,21 @@ export default function Home() {
     };
   }, []);
 
- const projects = [
-   {
-     title: "Insurance AI Platform",
-     image: insuranceImg,
-     desc: "AI-powered insurance premium prediction platform.",
-     tech: ["React", "FastAPI", "MongoDB"],
-   },
+  const projects = [
+    {
+      title: "Insurance AI Platform",
+      image: insuranceImg,
+      desc: "AI-powered insurance premium prediction platform.",
+      tech: ["React", "FastAPI", "MongoDB"],
+    },
 
-   {
-     title: "Premium E-Commerce",
-     image: ecommerceImg,
-     desc: "Modern ecommerce application.",
-     tech: ["React", "Node.js", "MongoDB"],
-   },
- ];
+    {
+      title: "Premium E-Commerce",
+      image: ecommerceImg,
+      desc: "Modern ecommerce application.",
+      tech: ["React", "Node.js", "MongoDB"],
+    },
+  ];
 
   const skills = [
     {
@@ -83,10 +98,99 @@ export default function Home() {
     },
   ];
 
-  const services = [
-    "Frontend Development",
-    "Backend Development",
-    "AI",
+  const services = ["Frontend Development", "Backend Development", "AI"];
+
+  const floatingIcons = [
+    {
+      icon: <FaReact className="text-cyan-400 text-5xl" />,
+      top: "8%",
+      left: "72%",
+      delay: 0,
+    },
+    {
+      icon: <VscVscode className="text-blue-500 text-5xl" />,
+      top: "12%",
+      left: "86%",
+      delay: 0.5,
+    },
+    {
+      icon: <SiTailwindcss className="text-sky-400 text-5xl" />,
+      top: "25%",
+      left: "95%",
+      delay: 1,
+    },
+    {
+      icon: <FaNodeJs className="text-green-500 text-5xl" />,
+      top: "28%",
+      left: "74%",
+      delay: 1.5,
+    },
+    {
+      icon: <FaPython className="text-yellow-400 text-5xl" />,
+      top: "42%",
+      left: "84%",
+      delay: 2,
+    },
+    {
+      icon: <SiTypescript className="text-blue-400 text-5xl" />,
+      top: "52%",
+      left: "66%",
+      delay: 2.5,
+    },
+    {
+      icon: <SiDocker className="text-sky-400 text-5xl" />,
+      top: "68%",
+      left: "86%",
+      delay: 3,
+    },
+    {
+      icon: <SiMongodb className="text-green-400 text-5xl" />,
+      top: "72%",
+      left: "56%",
+      delay: 3.5,
+    },
+    {
+      icon: <SiJavascript className="text-yellow-400 text-5xl" />,
+      top: "35%",
+      left: "48%",
+      delay: 4,
+    },
+    {
+      icon: <SiPostman className="text-orange-500 text-5xl" />,
+      top: "40%",
+      left: "97%",
+      delay: 4.5,
+    },
+    {
+      icon: <SiExpress className="text-gray-300 text-5xl" />,
+      top: "80%",
+      left: "50%",
+      delay: 5,
+    },
+    {
+      icon: <SiPostgresql className="text-blue-400 text-5xl" />,
+      top: "60%",
+      left: "92%",
+      delay: 5.5,
+    },
+    {
+      icon: <SiGit className="text-red-500 text-5xl" />,
+      top: "60%",
+      left: "74%",
+      delay: 6,
+    },
+    {
+      icon: <SiFirebase className="text-yellow-500 text-5xl" />,
+      top: "50%",
+      left: "80%",
+      delay: 6.5,
+    },
+    {
+      icon: <SiVercel className="text-white text-5xl" />,
+      top: "82%",
+      left: "70%",
+      delay: 7,
+    },
   ];
 
   return (
@@ -100,7 +204,6 @@ export default function Home() {
       overflow-hidden
       "
     >
-
       <div
         className="pointer-events-none fixed inset-0 z-0"
         style={{
@@ -114,20 +217,38 @@ export default function Home() {
         }}
       />
 
-
       <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(to_right,#06b6d4_1px,transparent_1px),linear-gradient(to_bottom,#06b6d4_1px,transparent_1px)] bg-size-[65px_65px]" />
 
       <div className="absolute top-0 left-0 w-125 h-125 bg-cyan-500/10 blur-[150px] rounded-full" />
 
       <div className="absolute bottom-0 right-0 w-125 h-125 bg-teal-500/10 blur-[150px] rounded-full" />
 
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-20">
+        <div className="hidden xl:block absolute inset-0 pointer-events-none">
+          {floatingIcons.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                y: [0, -18, 0],
+              }}
+              transition={{
+                duration: 4,
+                delay: item.delay,
+                repeat: Infinity,
+              }}
+              className="floating-orb"
+              style={{
+                top: item.top,
+                left: item.left,
+              }}
+            >
+              {item.icon}
+            </motion.div>
+          ))}
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
-
-
-        
-        
           <motion.div
             whileHover={{ y: -6 }}
             className="
@@ -241,7 +362,6 @@ export default function Home() {
 
             <p className="mt-5 text-zinc-400">Open Source Projects</p>
           </motion.div>
-
 
           <motion.div
             whileHover={{ y: -6 }}
@@ -406,10 +526,10 @@ export default function Home() {
               "
             >
               <div className="h-64 overflow-hidden">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="
                           w-full
                           h-full
                           object-cover
@@ -417,9 +537,9 @@ export default function Home() {
                           duration-500
                           hover:scale-110
                         "
-                      />
-                    </div>
-              
+                />
+              </div>
+
               <div className="p-8">
                 <h3 className="text-3xl font-black">{project.title}</h3>
 
@@ -604,8 +724,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-
 
       <style>{`
         .gradient-text {
