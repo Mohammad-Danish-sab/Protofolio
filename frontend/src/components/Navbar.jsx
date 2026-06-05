@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { FaGithub, FaLinkedin, FaCode, FaArrowRight } from "react-icons/fa";
 
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navItems = [
@@ -131,21 +132,22 @@ export default function Navbar() {
               </div>
 
               <motion.button
+                onClick={() => navigate("/Contact")}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="
-                hidden md:flex
-                items-center
-                gap-3
-                px-6 py-3
-                rounded-2xl
-                font-semibold
-                bg-linear-to-r
-                from-cyan-500
-                to-teal-500
-                hover:shadow-[0_0_40px_rgba(34,211,238,0.35)]
-                transition-all duration-300
-                "
+                    hidden md:flex
+                    items-center
+                    gap-3
+                    px-6 py-3
+                    rounded-2xl
+                    font-semibold
+                    bg-linear-to-r
+                    from-cyan-500
+                    to-teal-500
+                    hover:shadow-[0_0_40px_rgba(34,211,238,0.35)]
+                    transition-all duration-300
+                    "
               >
                 Hire Me
                 <FaArrowRight />
@@ -221,18 +223,22 @@ export default function Navbar() {
               </ul>
 
               <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  navigate("/contact");
+                }}
                 className="
-                mt-8
-                w-full
-                py-4
-                rounded-2xl
-                font-semibold
-                bg-linear-to-r
-                from-cyan-500
-                to-teal-500
-                hover:shadow-[0_0_40px_rgba(34,211,238,0.35)]
-                transition-all duration-300
-                "
+                     mt-8
+                     w-full
+                     py-4
+                     rounded-2xl
+                     font-semibold
+                     bg-linear-to-r
+                     from-cyan-500
+                     to-teal-500
+                     hover:shadow-[0_0_40px_rgba(34,211,238,0.35)]
+                     transition-all duration-300
+                     "
               >
                 Hire Me
               </button>
