@@ -40,6 +40,9 @@ import { VscVscode } from "react-icons/vsc";
 import { TypeAnimation } from "react-type-animation";
 
 export default function Home() {
+
+  const navigate = useNavigate();
+
   const [position, setPosition] = useState({
     x: 0,
     y: 0,
@@ -332,15 +335,16 @@ export default function Home() {
               </div>
 
               <button
+                onClick={() => navigate("/Contact")}
                 className="
-                w-12 h-12
-                rounded-full
-                bg-white
-                text-black
-                flex items-center justify-center
-                hover:scale-110
-                transition-all duration-300
-                "
+                     w-12 h-12
+                     rounded-full
+                     bg-white
+                     text-black
+                     flex items-center justify-center
+                     hover:scale-110
+                     transition-all duration-300
+                     "
               >
                 <FaArrowRight />
               </button>
@@ -460,17 +464,18 @@ export default function Home() {
 
             <div className="flex flex-wrap gap-5 mt-10">
               <button
+                onClick={() => navigate("/projects")}
                 className="
-                group
-                px-8 py-4
-                rounded-2xl
-                bg-linear-to-r
-                from-cyan-500
-                to-teal-500
-                font-semibold
-                hover:scale-105
-                transition-all duration-300
-                "
+                    group
+                    px-8 py-4
+                    rounded-2xl
+                    bg-linear-to-r
+                    from-cyan-500
+                    to-teal-500
+                    font-semibold
+                    hover:scale-105
+                    transition-all duration-300
+                    "
               >
                 <span className="flex items-center gap-3">
                   View Projects
@@ -699,25 +704,27 @@ export default function Home() {
 
           <div className="flex flex-wrap justify-center gap-5 mt-12">
             <button
+              onClick={() => navigate("/Contact")}
               className="
-              px-8 py-4
-              rounded-2xl
-              bg-linear-to-r
-              from-cyan-500
-              to-teal-500
-              font-semibold
-              "
+               px-8 py-4
+               rounded-2xl
+               bg-linear-to-r
+               from-cyan-500
+               to-teal-500
+               font-semibold
+               "
             >
               Hire Me
             </button>
 
             <button
+              onClick={() => navigate("/Contact")}
               className="
-              px-8 py-4
-              rounded-2xl
-              border border-white/10
-              bg-white/5
-              "
+                  px-8 py-4
+                  rounded-2xl
+                  border border-white/10
+                  bg-white/5
+                  "
             >
               Contact Now
             </button>
