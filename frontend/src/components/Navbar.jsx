@@ -232,7 +232,9 @@ export default function Navbar() {
                      w-full
                      py-4
                      rounded-2xl
-                     font-semibold
+           
+           
+           +          font-semibold
                      bg-linear-to-r
                      from-cyan-500
                      to-teal-500
