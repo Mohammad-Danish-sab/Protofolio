@@ -6,7 +6,7 @@ from app.core.cors import add_cors
 
 from app.models import *
 
-# from app.api.contact import router as contact_router
+from app.api.contact import router as contact_router
 from app.api.projects import router as project_router
 
 Base.metadata.create_all(bind=engine)
@@ -15,7 +15,7 @@ app = FastAPI()
 
 add_cors(app)
 
-# app.include_router(contact_router)
+app.include_router(contact_router)
 app.include_router(project_router)
 
 

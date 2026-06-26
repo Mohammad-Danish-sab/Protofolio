@@ -8,12 +8,8 @@ class ContactCreate(BaseModel):
     message: str
 
 
-class ContactResponse(BaseModel):
+class ContactResponse(ContactCreate):
     id: int
-    name: str
-    email: str
-    subject: str
-    message: str
 
     class Config:
         from_attributes = True

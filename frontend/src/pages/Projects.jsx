@@ -1,210 +1,108 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-
-import insuranceImg from "../assets/Images/insurance.png";
-import ecommerceImg from "../assets/Images/ecommerce.png";
-import issTrackerImg from "../assets/Images/isstracker.png";
-import kidsPortalImg from "../assets/Images/kidsportal.png";
-const projects = [
-  {
-    title: "Insurance AI Platform",
-    image: insuranceImg,
-    description:
-      "AI-powered insurance premium prediction platform with analytics dashboard and machine learning integration.",
-    tech: ["React", "FastAPI", "MongoDB"],
-    features: [
-      "Premium Prediction",
-      "Analytics Dashboard",
-      "Authentication",
-      "Responsive Design",
-    ],
-    github:
-      "https://github.com/Mohammad-Danish-sab/insurence-premium-predictor.git",
-    live: "https://insurence-premium-predictor.vercel.app/",
-  },
-
-  {
-    title: "Premium E-Commerce",
-    image: ecommerceImg,
-    description:
-      "Modern e-commerce application with premium UI, cart system, authentication and admin dashboard.",
-    tech: ["React", "Node.js", "MongoDB"],
-    features: [
-      "Shopping Cart",
-      "Admin Dashboard",
-      "Authentication",
-      "Responsive Design",
-    ],
-    github: "https://github.com/Mohammad-Danish-sab/E--commerce.git",
-    live: "#",
-  },
-
-  {
-    title: "ISS Tracker Project",
-    image: issTrackerImg,
-    description:
-      "Track the International Space Station in real time using React, FastAPI and live location APIs.",
-    tech: ["React", "FastAPI", "Tailwind"],
-    features: [
-      "Real-Time Tracking",
-      "Interactive Map",
-      "API Integration",
-      "Live Updates",
-    ],
-    github: "https://github.com/Mohammad-Danish-sab/ISS-TRACKER-PROJECT.git",
-    live: "#",
-  },
-
-  {
-    title: "Kids Portal",
-    image: kidsPortalImg,
-    description:
-      "Interactive learning platform for children with engaging educational content and modern UI.",
-    tech: ["React", "FastAPI", "Tailwind"],
-    features: [
-      "Learning Dashboard",
-      "Student Profiles",
-      "Interactive Content",
-      "Responsive Design",
-    ],
-    github: "https://github.com/your-github",
-    live: "#",
-  },
-];
+import API from "../api/api";
 
 export default function Projects() {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchProjects = async () => {
+    try {
+      const res = await API.get("/projects");
+
+      setProjects(res.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
   return (
-    <section className="min-h-screen bg-[#070707] text-white pt-36 pb-20 px-6">
+    <div className="min-h-screen bg-[#070707] text-white pt-36 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
-          <p className="text-cyan-400 tracking-[5px] uppercase text-sm">
+          <p className="text-cyan-400 uppercase tracking-[5px] text-sm">
             Portfolio
           </p>
 
-          <h1 className="text-5xl md:text-7xl font-black mt-5">
-            Featured Projects
-          </h1>
-
-          <p className="text-zinc-400 max-w-3xl mx-auto mt-6 text-lg leading-8">
-            Modern Full Stack Applications, AI Systems and Scalable Backend
-            Solutions.
-          </p>
+          <h1 className="text-5xl md:text-7xl font-black mt-5">My Projects</h1>
         </div>
 
-        <div className="space-y-12">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              whileHover={{
-                y: -10,
-              }}
-              className="
-                grid lg:grid-cols-2
-                gap-8
-                rounded-[35px]
-                border border-white/10
+        {loading ? (
+          <h2 className="text-center text-2xl">Loading Projects...</h2>
+        ) : (
+          <div className="grid lg:grid-cols-3 gap-8">
+            {projects.map((project) => (
+              <motion.div
+                key={project.id}
+                whileHover={{ y: -10 }}
+                className="
                 bg-white/5
-                backdrop-blur-xl
+                border border-white/10
+                rounded-[35px]
                 overflow-hidden
-              "
-            >
-              <div className="h-112 bg-[#0d0d0d] flex items-center justify-center overflow-hidden">
+                backdrop-blur-xl
+                "
+              >
                 <img
                   src={project.image}
                   alt={project.title}
                   className="
-                      max-w-full
-                      max-h-full
-                      object-contain
-                      transition-all
-                      duration-500
-                      hover:scale-105
-                    "
+                  w-full
+                  h-60
+                  object-cover
+                  "
                 />
-              </div>
 
-              <div className="p-8 lg:p-10">
-                <h2 className="text-4xl font-black">{project.title}</h2>
+                <div className="p-6">
+                  <h2 className="text-2xl font-black">{project.title}</h2>
 
-                <p className="text-zinc-400 leading-8 mt-6">
-                  {project.description}
-                </p>
+                  <p className="text-zinc-400 mt-4">{project.description}</p>
 
-                <div className="flex flex-wrap gap-3 mt-8">
-                  {(project.tech || []).map((tech, i) => (
-                    <span
-                      key={i}
+                  <p className="text-cyan-400 mt-4 text-sm">
+                    {project.tech_stack}
+                  </p>
+
+                  <div className="flex gap-4 mt-6">
+                    <a
+                      href={project.github_url}
+                      target="_blank"
+                      rel="noreferrer"
                       className="
-                        px-4 py-2
-                        rounded-full
-                        bg-cyan-500/10
-                        border border-cyan-400/20
-                        text-cyan-300
+                      px-5 py-3
+                      rounded-xl
+                      bg-white/10
                       "
                     >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                      GitHub
+                    </a>
 
-                <div className="mt-10">
-                  <h3 className="text-2xl font-bold mb-5">Features</h3>
-
-                  <ul className="space-y-3">
-                    {(project.features || []).map((feature, i) => (
-                      <li
-                        key={i}
-                        className="flex items-center gap-3 text-zinc-300"
-                      >
-                        <div className="w-2 h-2 rounded-full bg-cyan-400" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="flex gap-4 mt-10">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="
-                      px-6 py-4
-                      rounded-2xl
-                      border border-white/10
-                      bg-white/5
-                      flex items-center gap-3
-                      hover:bg-white/10
-                      transition-all
-                    "
-                  >
-                    <FaGithub />
-                    GitHub
-                  </a>
-
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="
-                      px-6 py-4
-                      rounded-2xl
-                      bg-linear-to-r
+                    <a
+                      href={project.live_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="
+                      px-5 py-3
+                      rounded-xl
+                      bg-gradient-to-r
                       from-cyan-500
                       to-teal-500
-                      flex items-center gap-3
-                      font-semibold
-                    "
-                  >
-                    <FaExternalLinkAlt />
-                    Live Demo
-                  </a>
+                      "
+                    >
+                      Live Demo
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
-    </section>
+    </div>
   );
 }
