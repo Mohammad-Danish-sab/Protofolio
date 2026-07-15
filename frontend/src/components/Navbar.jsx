@@ -54,8 +54,8 @@ export default function Navbar() {
                 w-12 h-12
                 rounded-2xl
                 bg-linear-to-br
-                from-cyan-400
-                to-teal-500
+                from-red-400
+                to-yellow-200
                 flex items-center justify-center
                 text-black
                 text-xl
@@ -73,8 +73,8 @@ export default function Navbar() {
                   font-black
                   tracking-[-1px]
                   bg-linear-to-r
-                  from-cyan-300
-                  to-teal-400
+                  from-red-400
+                  to-yellow-200
                   bg-clip-text
                   text-transparent
                   "
@@ -82,7 +82,7 @@ export default function Navbar() {
                   CodeWith Danish
                 </span>
 
-                <span className="text-zinc-500 text-xs mt-1">
+                <span className="text-zinc-300 text-xs mt-1">
                   Full Stack Developer
                 </span>
               </div>
@@ -110,7 +110,6 @@ export default function Navbar() {
             </ul>
 
             <div className="flex items-center gap-4">
-              {/* SOCIAL */}
               <div className="hidden md:flex items-center gap-3">
                 <a
                   href="https://github.com/Mohammad-Danish-sab"
@@ -143,8 +142,8 @@ export default function Navbar() {
                     rounded-2xl
                     font-semibold
                     bg-linear-to-r
-                    from-cyan-500
-                    to-teal-500
+                    from-red-400
+                    to-yellow-200
                     hover:shadow-[0_0_40px_rgba(34,211,238,0.35)]
                     transition-all duration-300
                     "
@@ -208,8 +207,8 @@ export default function Navbar() {
                       onClick={() => setMenuOpen(false)}
                       className="
                       block
-                      text-zinc-300
-                      hover:text-cyan-400
+                      text-red-300
+                      hover:text-yellow-400
                       transition-all duration-300
                       uppercase
                       tracking-[2px]
