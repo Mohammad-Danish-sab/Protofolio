@@ -53,9 +53,7 @@ export default function Navbar() {
                 className="
                 w-12 h-12
                 rounded-2xl
-                bg-linear-to-br
-                from-red-400
-                to-yellow-200
+                bg-emerald-200
                 flex items-center justify-center
                 text-black
                 text-xl
@@ -73,8 +71,8 @@ export default function Navbar() {
                   font-black
                   tracking-[-1px]
                   bg-linear-to-r
-                  from-red-400
-                  to-yellow-200
+                  from-emerald-400
+                  to-emerald-200
                   bg-clip-text
                   text-transparent
                   "
