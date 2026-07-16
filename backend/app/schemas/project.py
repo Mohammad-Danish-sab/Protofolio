@@ -1,16 +1,33 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
-class ProjectCreate(BaseModel):
+class ProjectBase(BaseModel):
     title: str
     description: str
-    image: str
-    github_link: str
-    live_link: str
-    tech_stack: str
+
+    image: Optional[str] = None
+
+    github_link: Optional[str] = None
+    live_link: Optional[str] = None
+
+    tech_stack: Optional[str] = None
+
+    category: Optional[str] = None
+    featured: bool = False
+
+    status: str = "Completed"
 
 
-class ProjectResponse(ProjectCreate):
+class ProjectCreate(ProjectBase):
+    pass
+
+
+class ProjectUpdate(ProjectBase):
+    pass
+
+
+class ProjectResponse(ProjectBase):
     id: int
 
     class Config:

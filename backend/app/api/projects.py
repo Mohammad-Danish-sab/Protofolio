@@ -5,14 +5,17 @@ from app.core.database import get_db
 from app.models.project import Project
 from app.schemas.project import (
     ProjectCreate,
-    ProjectResponse,
+    ProjectResponse
 )
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/projects",
+    tags=["Projects"]
+)
 
 
 @router.post(
-    "/projects",
+    "/",
     response_model=ProjectResponse
 )
 def create_project(
@@ -29,7 +32,7 @@ def create_project(
 
 
 @router.get(
-    "/projects",
+    "/",
     response_model=list[ProjectResponse]
 )
 def get_projects(
