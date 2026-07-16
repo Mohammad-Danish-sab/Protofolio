@@ -10,6 +10,7 @@ from app.api.contact import router as contact_router
 from app.api.projects import router as project_router
 from app.api.auth import router as auth_router
 from app.api.dashboard import router as dashboard_router
+from app.api.skills import router as skill_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -21,6 +22,7 @@ app.include_router(contact_router)
 app.include_router(project_router)
 app.include_router(auth_router)
 app.include_router(dashboard_router)
+app.include_router(skill_router)
 
 
 @app.get("/")
