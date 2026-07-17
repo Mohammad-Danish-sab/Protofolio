@@ -70,9 +70,7 @@ export default function Navbar() {
                   lg:text-2xl
                   font-black
                   tracking-[-1px]
-                  bg-linear-to-r
-                  from-emerald-400
-                  to-emerald-200
+                  bg-red-500
                   bg-clip-text
                   text-transparent
                   "

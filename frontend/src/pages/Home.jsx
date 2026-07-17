@@ -202,7 +202,7 @@ export default function Home() {
       className="
       relative
       min-h-screen
-      bg-[#070707]
+      bg-[#E4DDD3]
       text-white
       overflow-hidden
       "
@@ -222,7 +222,7 @@ export default function Home() {
 
       <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(to_right,#06b6d4_1px,transparent_1px),linear-gradient(to_bottom,#06b6d4_1px,transparent_1px)] bg-size-[65px_65px]" />
 
-      <div className="absolute top-0 left-0 w-125 h-125 bg-cyan-500/10 blur-[150px] rounded-full" />
+      <div className="absolute top-0 left-0 w-125 h-125 bg-[#F2EFE7] blur-[150px] rounded-full" />
 
       <div className="absolute bottom-0 right-0 w-125 h-125 bg-teal-500/10 blur-[150px] rounded-full" />
 
@@ -257,14 +257,14 @@ export default function Home() {
             className="
             rounded-4xl
             border border-white/10
-            bg-white/3
+            bg-[#00A19B]
             backdrop-blur-2xl
             p-7
             flex flex-col justify-between
             "
           >
             <div>
-              <p className="text-zinc-400 text-sm tracking-wide">
+              <p className="text-[#2E1F26] text-sm tracking-wide">
                 Full Stack Developer
               </p>
 
@@ -273,9 +273,7 @@ export default function Home() {
                   className="
                   absolute inset-0
                   rounded-full
-                  bg-linear-to-r
-                  from-cyan-400
-                  to-teal-500
+                  bg-[#E4DDD3]
                   blur-3xl
                   opacity-40
                   animate-pulse
@@ -291,19 +289,19 @@ export default function Home() {
                   rounded-full
                   object-cover
                   border-[5px]
-                  border-cyan-400
+                  border-[#E4DDD3]
                   shadow-[0_0_60px_rgba(34,211,238,0.35)]
                   "
                 />
               </div>
 
-              <h2 className="text-4xl font-black leading-tight mt-8">
+              <h2 className="text-[#F3E6D8] text-4xl font-black leading-tight mt-8">
                 Mohammad
                 <br />
                 Danish
               </h2>
 
-              <p className="text-zinc-400 leading-7 text-sm mt-5">
+              <p className="text-[#f2e8d5] leading-7 text-sm mt-5">
                 Passionate about building premium web experiences, scalable
                 backend systems and AI-powered applications.
               </p>
@@ -364,7 +362,7 @@ export default function Home() {
           >
             <FaGithub className="text-6xl" />
 
-            <p className="mt-5 text-zinc-400">Open Source Projects</p>
+            <p className="mt-5 text-zinc-900">Open Source Projects</p>
           </motion.div>
 
           <motion.div
@@ -378,9 +376,9 @@ export default function Home() {
             flex flex-col items-center justify-center
             "
           >
-            <FaCode className="text-6xl text-cyan-400" />
+            <FaCode className="text-6xl text-red-400" />
 
-            <p className="mt-5 text-zinc-400">Clean Modern UI</p>
+            <p className="mt-5 text-[#095748]">Clean Modern UI</p>
           </motion.div>
 
           <motion.div
