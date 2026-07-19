@@ -416,12 +416,12 @@ export default function Home() {
               px-5 py-3
               rounded-full
               border border-cyan-400/20
-              bg-cyan-400/10
+              bg-[#F28C8C]
               "
             >
-              <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></div>
+              <div className="w-3 h-3 rounded-full bg-[#B85C38] animate-pulse"></div>
 
-              <span className="text-cyan-300 text-sm">
+              <span className="text-s">
                 Available for freelance & internships
               </span>
             </div>
@@ -429,9 +429,9 @@ export default function Home() {
             <h1
               className="
               mt-8
-              text-5xl
-              md:text-6xl
-              xl:text-7xl
+              text-4xl
+              md:text-5xl
+              xl:text-6xl
               font-black
               leading-[0.95]
               tracking-[-3px]
@@ -455,7 +455,7 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className="text-zinc-400 leading-8 max-w-2xl mt-8 text-lg">
+            <p className="text-red-400 leading-8 max-w-2xl mt-8 text-lg">
               Skilled in React.js, FastAPI, Node.js, MongoDB and modern UI/UX
               systems focused on scalable applications.
             </p>
@@ -486,9 +486,9 @@ export default function Home() {
                 px-8 py-4
                 rounded-2xl
                 border border-white/10
-                bg-white/5
-                hover:border-cyan-400/30
-                hover:bg-cyan-500/10
+                bg-[#F28C8C]
+                hover:border-white/10
+                hover:bg-[#FFB07C]
                 transition-all duration-300
                 "
               >
@@ -507,24 +507,24 @@ export default function Home() {
         className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pb-10"
       >
         <div className="text-center">
-          <p className="text-cyan-400 uppercase tracking-[5px] text-sm">
+          <p className="text-[#B51E4B] uppercase tracking-[5px] text-m">
             Portfolio
           </p>
 
-          <h2 className="text-5xl md:text-6xl font-black mt-5">
+          <h2 className="text-5xl md:text-6xl font-black mt-5 text-[#F28C8C]">
             Featured Projects
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 mt-16">
+        <div className="grid lg:grid-cols-2 gap-16 mt-16 bg-">
           {projects.map((project, i) => (
             <motion.div
               key={i}
               whileHover={{ y: -8 }}
               className="
               rounded-4xl
-              border border-white/10
-              bg-white/3
+              border border-red-100
+              bg-[#00A19B]
               overflow-hidden
               "
             >
@@ -546,7 +546,7 @@ export default function Home() {
               <div className="p-8">
                 <h3 className="text-3xl font-black">{project.title}</h3>
 
-                <p className="text-zinc-400 leading-8 mt-5">{project.desc}</p>
+                <p className="leading-8 mt-5">{project.desc}</p>
 
                 <div className="flex flex-wrap gap-3 mt-7">
                   {project.tech.map((tech, idx) => (
