@@ -555,9 +555,10 @@ export default function Home() {
                       className="
                       px-4 py-2
                       rounded-full
-                      text-sm
-                      bg-white/5
+                      text-m
+                      bg-[#F2E8C2]
                       border border-white/10
+                      text-[#516b84]
                       "
                     >
                       {tech}
@@ -575,11 +576,11 @@ export default function Home() {
         className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-20"
       >
         <div className="text-center">
-          <p className="text-cyan-400 uppercase tracking-[5px] text-sm">
+          <p className="text-[#B51E4B] uppercase tracking-[5px] text-sm">
             Expertise
           </p>
 
-          <h2 className="text-5xl md:text-6xl font-black mt-5">
+          <h2 className="text-5xl md:text-6xl font-black mt-5 text-[#F28C8C]">
             Technical Skills
           </h2>
         </div>
@@ -591,17 +592,16 @@ export default function Home() {
               whileHover={{ y: -6 }}
               className="
               rounded-4xl
-              border border-white/10
-              bg-white/3
+              border border-red-100
+              bg-[#00A19B]
               p-8
+              text-[#E4DDD3]
               "
             >
               <div className="flex items-center justify-between">
                 <h3 className="text-2xl font-bold">{skill.name}</h3>
 
-                <span className="text-cyan-400 font-semibold">
-                  {skill.value}
-                </span>
+                <span className="text- font-semibold">{skill.value}</span>
               </div>
 
               <div className="h-3 rounded-full bg-white/5 mt-6 overflow-hidden">
@@ -612,9 +612,7 @@ export default function Home() {
                   className="
                   h-full
                   rounded-full
-                  bg-linear-to-r
-                  from-cyan-500
-                  to-teal-500
+                  bg-red-300
                   "
                 />
               </div>
@@ -628,11 +626,13 @@ export default function Home() {
         className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-24"
       >
         <div className="text-center">
-          <p className="text-cyan-400 uppercase tracking-[5px] text-sm">
+          <p className="text-[#B51E4B] uppercase tracking-[5px] text-m">
             Services
           </p>
 
-          <h2 className="text-5xl md:text-6xl font-black mt-5">What I Offer</h2>
+          <h2 className="text-5xl md:text-6xl font-black mt-5 text-[#F28C8C]">
+            What I Offer
+          </h2>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6 mt-16">
@@ -642,8 +642,8 @@ export default function Home() {
               whileHover={{ y: -8 }}
               className="
               rounded-4xl
-              border border-white/10
-              bg-white/3
+              border border-red-100
+              bg-[#00A19B]
               p-8
               text-center
               "
@@ -652,9 +652,7 @@ export default function Home() {
                 className="
                 w-24 h-24
                 rounded-[28px]
-                bg-linear-to-br
-                from-cyan-500
-                to-teal-500
+                bg-[#F28C8C]
                 mx-auto
                 flex items-center justify-center
                 text-4xl
@@ -663,9 +661,11 @@ export default function Home() {
                 ⚡
               </div>
 
-              <h3 className="text-3xl font-black mt-8">{service}</h3>
+              <h3 className="text-3xl font-black mt-8 text-[#f2e8d5]">
+                {service}
+              </h3>
 
-              <p className="text-zinc-400 leading-8 mt-5">
+              <p className="leading-8 mt-5 ">
                 Creating scalable futuristic digital experiences with modern
                 development technologies.
               </p>
@@ -681,21 +681,21 @@ export default function Home() {
         <div
           className="
           rounded-[40px]
-          border border-white/10
-          bg-white/3
+          border border-red-100
+          bg-[#00A19B]
           p-10 md:p-16
           text-center
           "
         >
-          <p className="text-cyan-400 uppercase tracking-[5px] text-sm">
+          <p className="text-red-300 uppercase tracking-[5px] text-m">
             Contact
           </p>
 
-          <h2 className="text-5xl md:text-6xl font-black mt-5">
+          <h2 className="text-5xl md:text-6xl font-black mt-5 text-[#f2e8d5]">
             Let’s Build Something Amazing
           </h2>
 
-          <p className="text-zinc-400 leading-8 max-w-2xl mx-auto mt-8 text-lg">
+          <p className="leading-8 max-w-2xl mx-auto mt-8 text-lg">
             Open for internships, freelance work and exciting collaborations in
             AI systems and full-stack development.
           </p>
@@ -706,9 +706,7 @@ export default function Home() {
               className="
                px-8 py-4
                rounded-2xl
-               bg-linear-to-r
-               from-cyan-500
-               to-teal-500
+               bg-[#F28C8C]
                font-semibold
                "
             >
@@ -720,8 +718,8 @@ export default function Home() {
               className="
                   px-8 py-4
                   rounded-2xl
-                  border border-white/10
-                  bg-white/5
+                 border-red-100
+                 bg-[#F28C8C]
                   "
             >
               Contact Now
