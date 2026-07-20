@@ -202,8 +202,8 @@ export default function Home() {
       className="
       relative
       min-h-screen
-      bg-[#E4DDD3]
-      text-white
+      bg-[#23212C]
+      text-[#DDD2F6]
       overflow-hidden
       "
     >
@@ -222,9 +222,9 @@ export default function Home() {
 
       <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(to_right,#06b6d4_1px,transparent_1px),linear-gradient(to_bottom,#06b6d4_1px,transparent_1px)] bg-size-[65px_65px]" />
 
-      <div className="absolute top-0 left-0 w-125 h-125 bg-[#F2EFE7] blur-[150px] rounded-full" />
+      <div className="absolute top-0 left-0 w-125 h-125 blur-[150px] rounded-full" />
 
-      <div className="absolute bottom-0 right-0 w-125 h-125 bg-teal-500/10 blur-[150px] rounded-full" />
+      <div className="absolute bottom-0 right-0 w-125 h-125 blur-[150px] rounded-full" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-20">
         <div className="hidden xl:block absolute inset-0 pointer-events-none">
@@ -256,15 +256,14 @@ export default function Home() {
             whileHover={{ y: -6 }}
             className="
             rounded-4xl
-            border border-white/10
-            bg-[#00A19B]
+            bg-[#405092]
             backdrop-blur-2xl
             p-7
             flex flex-col justify-between
             "
           >
             <div>
-              <p className="text-[#2E1F26] text-sm tracking-wide">
+              <p className="text-[#DDD2F6] text-sm tracking-wide">
                 Full Stack Developer
               </p>
 
@@ -273,8 +272,8 @@ export default function Home() {
                   className="
                   absolute inset-0
                   rounded-full
-                  bg-[#E4DDD3]
-                  blur-3xl
+                  bg-[#DDD2F6]
+                  blur-1xl
                   opacity-40
                   animate-pulse
                   "
@@ -289,19 +288,19 @@ export default function Home() {
                   rounded-full
                   object-cover
                   border-[5px]
-                  border-[#E4DDD3]
+                  border-[#f2e8d5]
                   shadow-[0_0_60px_rgba(34,211,238,0.35)]
                   "
                 />
               </div>
 
-              <h2 className="text-[#F3E6D8] text-4xl font-black leading-tight mt-8">
+              <h2 className="text-[#B86443] text-4xl font-black leading-tight mt-8">
                 Mohammad
                 <br />
                 Danish
               </h2>
 
-              <p className="text-[#f2e8d5] leading-7 text-sm mt-5">
+              <p className="text-[#DDD2F6] leading-7 text-m mt-5">
                 Passionate about building premium web experiences, scalable
                 backend systems and AI-powered applications.
               </p>
@@ -338,7 +337,7 @@ export default function Home() {
                      w-12 h-12
                      rounded-full
                      bg-white
-                     text-black
+                     text-red-500
                      flex items-center justify-center
                      hover:scale-110
                      transition-all duration-300
@@ -353,8 +352,7 @@ export default function Home() {
             whileHover={{ y: -6 }}
             className="
             rounded-4xl
-            border border-white/10
-            bg-white/3
+            bg-[#516b84]
             backdrop-blur-2xl
             h-52
             flex flex-col items-center justify-center
@@ -362,23 +360,22 @@ export default function Home() {
           >
             <FaGithub className="text-6xl" />
 
-            <p className="mt-5 text-zinc-900">Open Source Projects</p>
+            <p className="mt-5">Open Source Projects</p>
           </motion.div>
 
           <motion.div
             whileHover={{ y: -6 }}
             className="
             rounded-4xl
-            border border-white/10
-            bg-white/3
+            bg-[#516b84]
             backdrop-blur-2xl
             h-52
             flex flex-col items-center justify-center
             "
           >
-            <FaCode className="text-6xl text-red-400" />
+            <FaCode className="text-6xl text-[DDD2F6]" />
 
-            <p className="mt-5 text-[#095748]">Clean Modern UI</p>
+            <p className="mt-5 text-[#DDD2F6]">Clean Modern UI</p>
           </motion.div>
 
           <motion.div
@@ -386,8 +383,7 @@ export default function Home() {
             className="
             xl:col-span-2
             rounded-4xl
-            border border-white/10
-            bg-white/3
+            bg-[#516b84]
             backdrop-blur-2xl
             p-8 md:p-10
             overflow-hidden
@@ -416,12 +412,12 @@ export default function Home() {
               px-5 py-3
               rounded-full
               border border-cyan-400/20
-              bg-[#F28C8C]
+              bg-[#405092]
               "
             >
-              <div className="w-3 h-3 rounded-full bg-[#B85C38] animate-pulse"></div>
+              <div className="w-3 h-3 rounded-full bg-[#F28C8C] animate-pulse"></div>
 
-              <span className="text-s">
+              <span className="text-s text-[#DDD2F6]">
                 Available for freelance & internships
               </span>
             </div>
@@ -435,7 +431,8 @@ export default function Home() {
               font-black
               leading-[0.95]
               tracking-[-3px]
-              "
+              text-[#e6e5e4]
+            "
             >
               Building
               <br />
@@ -455,7 +452,7 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className="text-red-400 leading-8 max-w-2xl mt-8 text-lg">
+            <p className="leading-8 max-w-2xl mt-8 text-lg">
               Skilled in React.js, FastAPI, Node.js, MongoDB and modern UI/UX
               systems focused on scalable applications.
             </p>
@@ -467,15 +464,13 @@ export default function Home() {
                     group
                     px-8 py-4
                     rounded-2xl
-                    bg-linear-to-r
-                    from-cyan-500
-                    to-teal-500
+                    bg-[#f2e8d5]
                     font-semibold
                     hover:scale-105
                     transition-all duration-300
                     "
               >
-                <span className="flex items-center gap-3">
+                <span className="flex items-center gap-3 text-[#835e81]">
                   View Projects
                   <FaArrowRight className="group-hover:translate-x-1 duration-300" />
                 </span>
@@ -486,13 +481,13 @@ export default function Home() {
                 px-8 py-4
                 rounded-2xl
                 border border-white/10
-                bg-[#F28C8C]
+                bg-[#f2e8d5]
                 hover:border-white/10
                 hover:bg-[#FFB07C]
                 transition-all duration-300
                 "
               >
-                <span className="flex items-center gap-3">
+                <span className="flex items-center gap-3 text-[#835E81]">
                   <FaDownload />
                   Download Resume
                 </span>
@@ -507,11 +502,7 @@ export default function Home() {
         className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pb-10"
       >
         <div className="text-center">
-          <p className="text-[#B51E4B] uppercase tracking-[5px] text-m">
-            Portfolio
-          </p>
-
-          <h2 className="text-5xl md:text-6xl font-black mt-5 text-[#F28C8C]">
+          <h2 className="text-5xl md:text-6xl font-black mt-5 text-[#f2e8d5]">
             Featured Projects
           </h2>
         </div>
@@ -522,10 +513,10 @@ export default function Home() {
               key={i}
               whileHover={{ y: -8 }}
               className="
-              rounded-4xl
-              border border-red-100
-              bg-[#00A19B]
+              rounded-2xl
+              border border-[#DDD2F6]
               overflow-hidden
+              text-[#f2e8d5]
               "
             >
               <div className="h-64 overflow-hidden">
@@ -556,9 +547,8 @@ export default function Home() {
                       px-4 py-2
                       rounded-full
                       text-m
-                      bg-[#F2E8C2]
-                      border border-white/10
-                      text-[#516b84]
+                      bg-[#405092]
+                      text-[#f2e8d5]
                       "
                     >
                       {tech}
@@ -576,11 +566,7 @@ export default function Home() {
         className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-20"
       >
         <div className="text-center">
-          <p className="text-[#B51E4B] uppercase tracking-[5px] text-sm">
-            Expertise
-          </p>
-
-          <h2 className="text-5xl md:text-6xl font-black mt-5 text-[#F28C8C]">
+          <h2 className="text-5xl md:text-6xl font-black mt-5 text-[#f2e8d5]">
             Technical Skills
           </h2>
         </div>
@@ -592,8 +578,7 @@ export default function Home() {
               whileHover={{ y: -6 }}
               className="
               rounded-4xl
-              border border-red-100
-              bg-[#00A19B]
+              bg-[#516b84]
               p-8
               text-[#E4DDD3]
               "
@@ -612,7 +597,7 @@ export default function Home() {
                   className="
                   h-full
                   rounded-full
-                  bg-red-300
+                  bg-red-200
                   "
                 />
               </div>
@@ -626,11 +611,7 @@ export default function Home() {
         className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-24"
       >
         <div className="text-center">
-          <p className="text-[#B51E4B] uppercase tracking-[5px] text-m">
-            Services
-          </p>
-
-          <h2 className="text-5xl md:text-6xl font-black mt-5 text-[#F28C8C]">
+          <h2 className="text-5xl md:text-6xl font-black mt-5 text-[#f2e8d5]">
             What I Offer
           </h2>
         </div>
@@ -642,8 +623,7 @@ export default function Home() {
               whileHover={{ y: -8 }}
               className="
               rounded-4xl
-              border border-red-100
-              bg-[#00A19B]
+              bg-[#516b84]
               p-8
               text-center
               "
@@ -652,7 +632,7 @@ export default function Home() {
                 className="
                 w-24 h-24
                 rounded-[28px]
-                bg-[#F28C8C]
+                bg-[#e6e5e4]
                 mx-auto
                 flex items-center justify-center
                 text-4xl
@@ -681,16 +661,10 @@ export default function Home() {
         <div
           className="
           rounded-[40px]
-          border border-red-100
-          bg-[#00A19B]
           p-10 md:p-16
           text-center
           "
         >
-          <p className="text-red-300 uppercase tracking-[5px] text-m">
-            Contact
-          </p>
-
           <h2 className="text-5xl md:text-6xl font-black mt-5 text-[#f2e8d5]">
             Let’s Build Something Amazing
           </h2>
@@ -706,8 +680,9 @@ export default function Home() {
               className="
                px-8 py-4
                rounded-2xl
-               bg-[#F28C8C]
+               bg-[#f2e8d5]
                font-semibold
+               text-[#835E81]
                "
             >
               Hire Me
@@ -718,8 +693,9 @@ export default function Home() {
               className="
                   px-8 py-4
                   rounded-2xl
-                 border-red-100
-                 bg-[#F28C8C]
+                 bg-[#f2e8d5]
+                 font-semibold
+                 text-[#835E81]
                   "
             >
               Contact Now

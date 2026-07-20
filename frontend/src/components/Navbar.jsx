@@ -38,8 +38,7 @@ export default function Navbar() {
         <div
           className="
           backdrop-blur-2xl
-          bg-[#00A19B]
-          border border-white/10
+          bg-[#405092]
           rounded-[28px]
           px-6 lg:px-8
           py-4
@@ -53,9 +52,9 @@ export default function Navbar() {
                 className="
                 w-12 h-12
                 rounded-2xl
-                bg-[#F28C8C]
+                bg-[#EDEEE9]
                 flex items-center justify-center
-                text-black
+                text-[#516b84]
                 text-xl
                 shadow-[0_0_30px_rgba(34,211,238,0.35)]
                 "
@@ -70,7 +69,7 @@ export default function Navbar() {
                   lg:text-2xl
                   font-black
                   tracking-[-1px]
-                  bg-[#F28C8C]
+                  bg-[#e6e5e4]
                   bg-clip-text
                   text-transparent
                   "
@@ -78,7 +77,7 @@ export default function Navbar() {
                   CodeWith Danish
                 </span>
 
-                <span className="text-[#FFB07C] text-s mt-1">
+                <span className="text-[#F28C8C] text-m mt-1">
                   Full Stack Developer
                 </span>
               </div>
@@ -91,7 +90,7 @@ export default function Navbar() {
                     to={item.path}
                     className="
                     text-zinc-200
-                    hover:text-[#001619]
+                    hover:text-[#BDEEE9]
                     transition-all duration-300
                     text-sm
                     uppercase
@@ -206,7 +205,7 @@ export default function Navbar() {
                       transition-all duration-300
                       uppercase
                       tracking-[2px]
-                      text-sm
+                      text-m
                       "
                     >
                       {item.name}
