@@ -78,7 +78,7 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section className="min-h-screen bg-[#070707] text-white pt-36 pb-20 px-6">
+    <section className="min-h-screen bg-[#405092] text-white pt-36 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <p className="text-cyan-400 uppercase tracking-[5px] text-sm">
