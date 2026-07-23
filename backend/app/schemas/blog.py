@@ -47,3 +47,15 @@ class BlogResponse(BlogBase):
 
     class Config:
         from_attributes = True
+
+
+class BlogUpdate(BaseModel):
+    title: str
+    slug: str
+    excerpt: str
+    content: str
+    cover_image: str
+    category: str
+    tags: str
+    featured: bool
+    published: bool
