@@ -16,6 +16,7 @@ from app.api.about import router as about_router
 from app.api.experience import router as experience_router
 from app.api.education import router as education_router
 from app.api.testimonial import router as testimonial_router
+from app.api.blog import router as blog_router
 
 
 Base.metadata.create_all(bind=engine)
@@ -34,6 +35,8 @@ app.include_router(about_router)
 app.include_router(experience_router)
 app.include_router(education_router)
 app.include_router(testimonial_router)
+app.include_router(blog_router)
+
 
 
 @app.get("/")
