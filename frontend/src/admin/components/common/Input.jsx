@@ -1,15 +1,7 @@
-export default function Input({
-  label,
-  ...props
-}) {
+export default function Input({ label, ...props }) {
   return (
     <div className="space-y-2">
-
-      {label && (
-        <label className="text-sm text-zinc-300">
-          {label}
-        </label>
-      )}
+      {label && <label className="text-sm text-zinc-300">{label}</label>}
 
       <input
         {...props}
@@ -26,7 +18,6 @@ export default function Input({
         focus:border-cyan-500
         "
       />
-
     </div>
   );
 }

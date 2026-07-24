@@ -22,4 +22,3 @@ export default function ConfirmDelete({ open, onClose, onConfirm }) {
     </Modal>
   );
 }
-
