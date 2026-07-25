@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import ReactQuill from "react-quill";
 import slugify from "slugify";
 
 import Input from "../common/Input";
@@ -47,18 +46,17 @@ export default function BlogForm({
         }),
       );
     }
-  }, [title]);
+  }, [title, setValue]);
 
   useEffect(() => {
     if (initialData) {
       reset(initialData);
     }
-  }, [initialData]);
+  }, [initialData, reset]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* Cover Image */}
-
       <Controller
         name="image"
         control={control}
@@ -68,49 +66,53 @@ export default function BlogForm({
       />
 
       {/* Title */}
-
-      <Input
-        label="Title"
-        {...register("title", {
-          required: "Title is required",
-        })}
-      />
-
-      {errors.title && (
-        <p className="text-red-500 text-sm">{errors.title.message}</p>
-      )}
+      <div>
+        <Input
+          label="Title"
+          placeholder="Enter blog title"
+          {...register("title", {
+            required: "Title is required",
+          })}
+        />
+        {errors.title && (
+          <p className="mt-1 text-sm text-red-500">{errors.title.message}</p>
+        )}
+      </div>
 
       {/* Slug */}
-
-      <Input label="Slug" {...register("slug")} />
+      <Input label="Slug" placeholder="blog-slug" {...register("slug")} />
 
       {/* Category */}
-
       <Input label="Category" placeholder="React" {...register("category")} />
 
       {/* Excerpt */}
-
       <div>
-        <label className="text-sm mb-2 block">Excerpt</label>
+        <label className="mb-2 block text-sm font-medium text-slate-300">
+          Excerpt
+        </label>
 
         <textarea
-          rows={3}
-          className="w-full rounded-xl bg-slate-900 border border-slate-700 p-4"
+          rows={4}
+          className="w-full rounded-xl border border-slate-700 bg-slate-900 p-4 text-white placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none"
+          placeholder="Short description of your blog..."
           {...register("excerpt")}
         />
       </div>
 
-      {/* Content */}
-
+      {/* Blog Content */}
       <div>
-        <label className="mb-3 block">Blog Content</label>
+        <label className="mb-2 block text-sm font-medium text-slate-300">
+          Blog Content
+        </label>
 
         <Controller
           name="content"
           control={control}
           render={({ field }) => (
-            <ReactQuill
-              theme="snow"
+            <textarea
+              rows={15}
+              placeholder="Write your blog here..."
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 p-4 text-white placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none resize-none"
               value={field.value}
               onChange={field.onChange}
             />
@@ -119,36 +121,54 @@ export default function BlogForm({
       </div>
 
       {/* Featured */}
-
       <div className="flex items-center gap-3">
-        <input type="checkbox" {...register("featured")} />
-
-        <label>Featured Blog</label>
+        <input
+          type="checkbox"
+          id="featured"
+          className="h-4 w-4 accent-cyan-500"
+          {...register("featured")}
+        />
+        <label htmlFor="featured" className="text-slate-300">
+          Featured Blog
+        </label>
       </div>
 
       {/* Published */}
-
       <div className="flex items-center gap-3">
-        <input type="checkbox" {...register("published")} />
-
-        <label>Publish Immediately</label>
+        <input
+          type="checkbox"
+          id="published"
+          className="h-4 w-4 accent-cyan-500"
+          {...register("published")}
+        />
+        <label htmlFor="published" className="text-slate-300">
+          Publish Immediately
+        </label>
       </div>
 
-      {/* SEO */}
+      {/* SEO Title */}
+      <Input
+        label="SEO Title"
+        placeholder="SEO title"
+        {...register("seo_title")}
+      />
 
-      <Input label="SEO Title" {...register("seo_title")} />
-
+      {/* SEO Description */}
       <div>
-        <label className="block mb-2">SEO Description</label>
+        <label className="mb-2 block text-sm font-medium text-slate-300">
+          SEO Description
+        </label>
 
         <textarea
-          rows={3}
-          className="w-full rounded-xl bg-slate-900 border border-slate-700 p-4"
+          rows={4}
+          className="w-full rounded-xl border border-slate-700 bg-slate-900 p-4 text-white placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none"
+          placeholder="SEO description..."
           {...register("seo_description")}
         />
       </div>
 
-      <Button type="submit" disabled={loading}>
+      {/* Submit */}
+      <Button type="submit" disabled={loading} className="w-full">
         {loading ? "Saving..." : initialData ? "Update Blog" : "Create Blog"}
       </Button>
     </form>
