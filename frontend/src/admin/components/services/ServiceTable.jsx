@@ -4,39 +4,44 @@ import toast from "react-hot-toast";
 
 import Card from "../common/Card";
 import ConfirmDelete from "../common/ConfirmDelete";
-import DynamicIcon from "../common/DynamicIcon";
 
-import { deleteSkill } from "../../services/skillService";
+import { deleteService } from "../../services/serviceService";
 
-export default function SkillTable({ skills = [], refreshSkills, onEdit }) {
+export default function ServiceTable({
+  services = [],
+  refreshServices,
+  onEdit,
+}) {
   const [search, setSearch] = useState("");
-  const [deleteOpen, setDeleteOpen] = useState(false);
-  const [selectedSkill, setSelectedSkill] = useState(null);
 
-  const filteredSkills = useMemo(() => {
+  const [deleteOpen, setDeleteOpen] = useState(false);
+
+  const [selectedService, setSelectedService] = useState(null);
+
+  const filteredServices = useMemo(() => {
     const query = search.toLowerCase();
 
-    return skills.filter(
-      (skill) =>
-        skill.name?.toLowerCase().includes(query) ||
-        skill.category?.toLowerCase().includes(query),
+    return services.filter(
+      (service) =>
+        service.title?.toLowerCase().includes(query) ||
+        service.description?.toLowerCase().includes(query),
     );
-  }, [skills, search]);
+  }, [services, search]);
 
   const handleDelete = async () => {
-    if (!selectedSkill) return;
+    if (!selectedService) return;
 
     try {
-      await deleteSkill(selectedSkill.id);
+      await deleteService(selectedService.id);
 
-      toast.success("Skill deleted successfully");
+      toast.success("Service deleted successfully");
 
-      await refreshSkills();
+      await refreshServices();
 
       setDeleteOpen(false);
-      setSelectedSkill(null);
+      setSelectedService(null);
     } catch (error) {
-      toast.error(error?.response?.data?.detail || "Failed to delete skill");
+      toast.error(error?.response?.data?.detail || "Failed to delete service");
     }
   };
 
@@ -54,7 +59,7 @@ export default function SkillTable({ skills = [], refreshSkills, onEdit }) {
 
             <input
               type="text"
-              placeholder="Search Skills..."
+              placeholder="Search services..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="
@@ -73,9 +78,9 @@ export default function SkillTable({ skills = [], refreshSkills, onEdit }) {
           </div>
 
           <p className="text-slate-400">
-            Total Skills :
+            Total Services :
             <span className="ml-2 font-bold text-cyan-400">
-              {filteredSkills.length}
+              {filteredServices.length}
             </span>
           </p>
         </div>
@@ -86,75 +91,53 @@ export default function SkillTable({ skills = [], refreshSkills, onEdit }) {
           <table className="w-full">
             <thead>
               <tr className="border-b border-slate-700">
-                <th className="text-left py-4">Skill</th>
+                <th className="text-left py-4">Title</th>
 
-                <th className="text-left">Category</th>
+                <th className="text-left">Description</th>
 
-                <th className="text-center">Level</th>
+                <th className="text-center">Icon</th>
 
                 <th className="text-center">Color</th>
+
+                <th className="text-center">Order</th>
 
                 <th className="text-center">Actions</th>
               </tr>
             </thead>
 
             <tbody>
-              {filteredSkills.length === 0 ? (
+              {filteredServices.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="text-center py-10 text-slate-400">
-                    No Skills Found
+                  <td colSpan={6} className="text-center py-10 text-slate-400">
+                    No Services Found
                   </td>
                 </tr>
               ) : (
-                filteredSkills.map((skill) => (
+                filteredServices.map((service) => (
                   <tr
-                    key={skill.id}
+                    key={service.id}
                     className="border-b border-slate-800 hover:bg-slate-900 transition"
                   >
-                    {/* Name & Icon */}
+                    {/* Title */}
 
                     <td className="py-5">
-                      <div className="flex items-center gap-3">
-                        <div
-                          className="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-800 border border-slate-700"
-                          style={{ color: skill.color }}
-                        >
-                          <DynamicIcon name={skill.icon} size={20} />
-                        </div>
-
-                        <div>
-                          <h3 className="font-semibold">{skill.name}</h3>
-                          <p className="text-xs text-slate-500">{skill.icon}</p>
-                        </div>
-                      </div>
+                      <h3 className="font-semibold">{service.title}</h3>
                     </td>
 
-                    {/* Category */}
+                    {/* Description */}
 
-                    <td>
-                      <span className="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-sm">
-                        {skill.category}
+                    <td className="max-w-sm">
+                      <p className="text-slate-400 line-clamp-2">
+                        {service.description}
+                      </p>
+                    </td>
+
+                    {/* Icon */}
+
+                    <td className="text-center">
+                      <span className="px-3 py-1 rounded-full bg-slate-800 text-cyan-400 text-sm">
+                        {service.icon}
                       </span>
-                    </td>
-
-                    {/* Level */}
-
-                    <td className="text-center w-56">
-                      <div className="flex items-center gap-3">
-                        <div className="w-full bg-slate-800 rounded-full h-2">
-                          <div
-                            className="h-2 rounded-full"
-                            style={{
-                              width: `${skill.level}%`,
-                              backgroundColor: skill.color,
-                            }}
-                          />
-                        </div>
-
-                        <span className="text-sm font-semibold">
-                          {skill.level}%
-                        </span>
-                      </div>
                     </td>
 
                     {/* Color */}
@@ -163,9 +146,15 @@ export default function SkillTable({ skills = [], refreshSkills, onEdit }) {
                       <div
                         className="w-8 h-8 rounded-full mx-auto border border-slate-700"
                         style={{
-                          backgroundColor: skill.color,
+                          backgroundColor: service.color,
                         }}
                       />
+                    </td>
+
+                    {/* Order */}
+
+                    <td className="text-center font-semibold text-cyan-400">
+                      {service.order}
                     </td>
 
                     {/* Actions */}
@@ -174,7 +163,7 @@ export default function SkillTable({ skills = [], refreshSkills, onEdit }) {
                       <div className="flex justify-center gap-3">
                         <button
                           type="button"
-                          onClick={() => onEdit(skill)}
+                          onClick={() => onEdit(service)}
                           className="
                             w-10
                             h-10
@@ -193,7 +182,7 @@ export default function SkillTable({ skills = [], refreshSkills, onEdit }) {
                         <button
                           type="button"
                           onClick={() => {
-                            setSelectedSkill(skill);
+                            setSelectedService(service);
                             setDeleteOpen(true);
                           }}
                           className="
@@ -224,7 +213,7 @@ export default function SkillTable({ skills = [], refreshSkills, onEdit }) {
         open={deleteOpen}
         onClose={() => setDeleteOpen(false)}
         onConfirm={handleDelete}
-        title="Delete Skill"
+        title="Delete Service"
         description="This action cannot be undone."
       />
     </>

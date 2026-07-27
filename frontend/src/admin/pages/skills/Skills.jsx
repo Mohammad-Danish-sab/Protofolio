@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Plus } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -20,24 +20,25 @@ export default function Skills() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState(null);
 
-  useEffect(() => {
-    fetchSkills();
-  }, []);
-
-  const fetchSkills = async () => {
+  const fetchSkills = useCallback(async () => {
     try {
       setLoading(true);
 
       const data = await getSkills();
 
-      setSkills(data);
+      setSkills(Array.isArray(data) ? data : []);
     } catch (error) {
-      console.error(error);
-      toast.error("Failed to load skills");
+      console.error("Fetch Skills Error:", error);
+
+      toast.error(error?.response?.data?.detail || "Failed to load skills");
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchSkills();
+  }, [fetchSkills]);
 
   const handleAdd = () => {
     setSelectedSkill(null);
@@ -47,6 +48,11 @@ export default function Skills() {
   const handleEdit = (skill) => {
     setSelectedSkill(skill);
     setModalOpen(true);
+  };
+
+  const handleClose = () => {
+    setModalOpen(false);
+    setSelectedSkill(null);
   };
 
   return (
@@ -77,7 +83,7 @@ export default function Skills() {
 
       <SkillModal
         open={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={handleClose}
         skill={selectedSkill}
         refreshSkills={fetchSkills}
       />

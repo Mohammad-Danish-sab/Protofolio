@@ -1,17 +1,17 @@
 const TOKEN_KEY = "admin_token";
 
-export function saveToken(token) {
+export const saveToken = (token) => {
   localStorage.setItem(TOKEN_KEY, token);
-}
+};
 
-export function getToken() {
+export const getToken = () => {
   return localStorage.getItem(TOKEN_KEY);
-}
+};
 
-export function removeToken() {
+export const removeToken = () => {
   localStorage.removeItem(TOKEN_KEY);
-}
+};
 
-export function isLoggedIn() {
-  return !!localStorage.getItem(TOKEN_KEY);
-}
+export const isLoggedIn = () => {
+  return !!getToken();
+};

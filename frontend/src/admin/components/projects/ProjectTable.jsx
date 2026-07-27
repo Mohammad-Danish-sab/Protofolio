@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Pencil, Trash2, Github, ExternalLink } from "lucide-react";
+import { Pencil, Trash2, ExternalLink } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 import Card from "../common/Card";
@@ -14,18 +15,20 @@ export default function ProjectTable({
   onEdit,
 }) {
   const [search, setSearch] = useState("");
-
   const [deleteOpen, setDeleteOpen] = useState(false);
-
   const [selectedProject, setSelectedProject] = useState(null);
 
   const filteredProjects = useMemo(() => {
+    const query = search.toLowerCase();
+
     return projects.filter((project) => {
-      const query = search.toLowerCase();
+      const tech = Array.isArray(project.tech_stack)
+        ? project.tech_stack.join(", ")
+        : project.tech_stack || "";
 
       return (
         project.title?.toLowerCase().includes(query) ||
-        project.tech_stack?.toLowerCase().includes(query)
+        tech.toLowerCase().includes(query)
       );
     });
   }, [projects, search]);
@@ -38,15 +41,14 @@ export default function ProjectTable({
 
       toast.success("Project deleted successfully");
 
-      refreshProjects();
+      await refreshProjects();
 
       setDeleteOpen(false);
-
       setSelectedProject(null);
     } catch (error) {
       console.error(error);
 
-      toast.error("Failed to delete project");
+      toast.error(error?.response?.data?.detail || "Failed to delete project");
     }
   };
 
@@ -66,7 +68,7 @@ export default function ProjectTable({
 
           <div className="text-sm text-slate-400">
             Total Projects :
-            <span className="font-bold text-cyan-400 ml-2">
+            <span className="ml-2 font-bold text-cyan-400">
               {filteredProjects.length}
             </span>
           </div>
@@ -79,15 +81,10 @@ export default function ProjectTable({
             <thead>
               <tr className="border-b border-slate-700">
                 <th className="py-4 text-left">Image</th>
-
                 <th className="text-left">Title</th>
-
                 <th className="text-left">Tech Stack</th>
-
                 <th className="text-center">GitHub</th>
-
                 <th className="text-center">Live</th>
-
                 <th className="text-center">Actions</th>
               </tr>
             </thead>
@@ -109,9 +106,12 @@ export default function ProjectTable({
 
                     <td className="py-5">
                       <img
-                        src={project.image}
+                        src={
+                          project.image ||
+                          "https://placehold.co/300x200?text=No+Image"
+                        }
                         alt={project.title}
-                        className="w-20 h-14 rounded-xl object-cover border border-slate-700"
+                        className="w-20 h-14 rounded-xl object-cover border border-slate-700 bg-slate-800"
                       />
                     </td>
 
@@ -122,49 +122,59 @@ export default function ProjectTable({
                         {project.title}
                       </h3>
 
-                      <p className="text-slate-400 text-sm line-clamp-2 mt-1">
+                      <p className="text-sm text-slate-400 line-clamp-2 mt-1">
                         {project.description}
                       </p>
                     </td>
 
-                    {/* Tech */}
+                    {/* Tech Stack */}
 
                     <td>
                       <span className="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-sm">
-                        {project.tech_stack}
+                        {Array.isArray(project.tech_stack)
+                          ? project.tech_stack.join(", ")
+                          : project.tech_stack}
                       </span>
                     </td>
 
-                    {/* Github */}
+                    {/* GitHub */}
 
                     <td className="text-center">
-                      <a
-                        href={project.github_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex"
-                      >
-                        <Github
-                          className="hover:text-cyan-400 transition"
-                          size={20}
-                        />
-                      </a>
+                      {project.github_link ? (
+                        <a
+                          href={project.github_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex"
+                        >
+                          <FaGithub
+                            size={20}
+                            className="hover:text-cyan-400 transition"
+                          />
+                        </a>
+                      ) : (
+                        <span className="text-slate-500">—</span>
+                      )}
                     </td>
 
                     {/* Live */}
 
                     <td className="text-center">
-                      <a
-                        href={project.live_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex"
-                      >
-                        <ExternalLink
-                          className="hover:text-green-400 transition"
-                          size={20}
-                        />
-                      </a>
+                      {project.live_link ? (
+                        <a
+                          href={project.live_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex"
+                        >
+                          <ExternalLink
+                            size={20}
+                            className="hover:text-green-400 transition"
+                          />
+                        </a>
+                      ) : (
+                        <span className="text-slate-500">—</span>
+                      )}
                     </td>
 
                     {/* Actions */}

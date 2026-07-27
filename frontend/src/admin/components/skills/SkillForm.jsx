@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 
 import Input from "../common/Input";
 import Button from "../common/Button";
+import DynamicIcon from "../common/DynamicIcon";
 
 const categories = [
   "Frontend",
@@ -41,6 +42,7 @@ export default function SkillForm({ initialData, onSubmit, loading }) {
 
   const level = watch("level");
   const color = watch("color");
+  const iconName = watch("icon");
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -55,16 +57,29 @@ export default function SkillForm({ initialData, onSubmit, loading }) {
         error={errors.name?.message}
       />
 
-      {/* Icon */}
+      {/* Icon Name with Preview */}
 
-      <Input
-        label="React Icon Name"
-        placeholder="FaReact"
-        {...register("icon", {
-          required: "Icon is required",
-        })}
-        error={errors.icon?.message}
-      />
+      <div>
+        <div className="flex items-center justify-between mb-1">
+          <label className="block text-sm font-medium">
+            React Icon Name (e.g., FaReact, SiCanva, SiJavascript)
+          </label>
+          <div className="flex items-center gap-2 text-xs text-slate-400">
+            <span>Preview:</span>
+            <div className="p-1 bg-slate-800 rounded border border-slate-700">
+              <DynamicIcon name={iconName} size={16} style={{ color }} />
+            </div>
+          </div>
+        </div>
+
+        <Input
+          placeholder="FaReact"
+          {...register("icon", {
+            required: "Icon is required",
+          })}
+          error={errors.icon?.message}
+        />
+      </div>
 
       {/* Category */}
 

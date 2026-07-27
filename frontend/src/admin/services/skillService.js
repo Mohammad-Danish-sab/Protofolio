@@ -1,37 +1,21 @@
 import api from "./api";
 
-/* ===========================
-   GET ALL SKILLS
-=========================== */
-
 export const getSkills = async () => {
-  const { data } = await api.get("/skills");
-  return data;
+  const res = await api.get("/skills");
+  return res.data;
 };
 
-/* ===========================
-   CREATE SKILL
-=========================== */
-
-export const createSkill = async (skillData) => {
-  const { data } = await api.post("/skills", skillData);
-  return data;
+export const createSkill = async (data) => {
+  const res = await api.post("/skills", data);
+  return res.data;
 };
 
-/* ===========================
-   UPDATE SKILL
-=========================== */
-
-export const updateSkill = async (id, skillData) => {
-  const { data } = await api.put(`/skills/${id}`, skillData);
-  return data;
+export const updateSkill = async (id, data) => {
+  const res = await api.put(`/skills/${id}`, data);
+  return res.data;
 };
-
-/* ===========================
-   DELETE SKILL
-=========================== */
 
 export const deleteSkill = async (id) => {
-  const { data } = await api.delete(`/skills/${id}`);
-  return data;
+  const res = await api.delete(`/skills/${id}`);
+  return res.data;
 };
