@@ -14,24 +14,27 @@ export default function ProjectModal({
 }) {
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (data) => {
+  const handleSubmit = async (formData) => {
     try {
       setLoading(true);
 
       if (project) {
-        await updateProject(project.id, data);
+        await updateProject(project.id, formData);
+
         toast.success("Project updated successfully");
       } else {
-        await createProject(data);
+        await createProject(formData);
+
         toast.success("Project created successfully");
       }
 
       await refreshProjects();
 
       onClose();
-    } catch (err) {
-      console.error(err);
-      toast.error(err?.response?.data?.detail || "Something went wrong");
+    } catch (error) {
+      console.error(error);
+
+      toast.error(error?.response?.data?.detail || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -41,8 +44,8 @@ export default function ProjectModal({
     <Modal
       open={open}
       onClose={onClose}
-      title={project ? "Edit Project" : "Add Project"}
-      size="xl"
+      title={project ? "Update Project" : "Add New Project"}
+      size="2xl"
     >
       <ProjectForm
         initialData={project}
