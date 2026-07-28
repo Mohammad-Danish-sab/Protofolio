@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-/* Client Layout */
+/* Client Components */
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -13,21 +13,21 @@ import Services from "../pages/Services";
 import Contact from "../pages/Contact";
 import NotFound from "../pages/NotFound";
 
-/* Admin Pages */
-import Dashboard from "../admin/pages/dashboard/Dashboard";
-import AdminProjects from "../admin/pages/projects/Projects";
-import Blogs from "../admin/pages/blogs/Blogs";
-import ProtectedRoute from "../admin/routes/ProtectedRoute";
+/* Admin */
 import Login from "../admin/pages/auth/Login";
+import Dashboard from "../admin/pages/dashboard/Dashboard";
+import Hero from "../admin/pages/hero/Hero";
+import AdminProjects from "../admin/pages/projects/Projects";
+import AdminBlogs from "../admin/pages/blogs/Blogs";
+import AdminSkills from "../admin/pages/skills/Skills";
+import AdminServices from "../admin/pages/services/Services";
+import ProtectedRoute from "../admin/routes/ProtectedRoute";
 
-/* Layout for Client */
 function ClientLayout({ children }) {
   return (
     <div className="bg-[#020617] text-white min-h-screen overflow-x-hidden">
       <Navbar />
-
       {children}
-
       <Footer />
     </div>
   );
@@ -36,7 +36,7 @@ function ClientLayout({ children }) {
 export default function AppRoutes() {
   return (
     <Routes>
-      {/* Client Routes */}
+      {/* Client */}
 
       <Route
         path="/"
@@ -92,11 +92,26 @@ export default function AppRoutes() {
         }
       />
 
+      {/* Admin Login */}
+
+      <Route path="/admin/login" element={<Login />} />
+
+      {/* Protected Admin */}
+
       <Route
         path="/admin/dashboard"
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/hero"
+        element={
+          <ProtectedRoute>
+            <Hero />
           </ProtectedRoute>
         }
       />
@@ -114,18 +129,28 @@ export default function AppRoutes() {
         path="/admin/blogs"
         element={
           <ProtectedRoute>
-            <Blogs />
+            <AdminBlogs />
           </ProtectedRoute>
         }
       />
 
-      {/* Admin Routes */}
+      <Route
+        path="/admin/skills"
+        element={
+          <ProtectedRoute>
+            <AdminSkills />
+          </ProtectedRoute>
+        }
+      />
 
-      <Route path="/admin/dashboard" element={<Dashboard />} />
-
-      <Route path="/admin/projects" element={<AdminProjects />} />
-
-      <Route path="/admin/blogs" element={<Blogs />} />
+      <Route
+        path="/admin/services"
+        element={
+          <ProtectedRoute>
+            <AdminServices />
+          </ProtectedRoute>
+        }
+      />
 
       {/* 404 */}
 

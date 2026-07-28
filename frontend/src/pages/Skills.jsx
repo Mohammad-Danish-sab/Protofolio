@@ -18,8 +18,8 @@ import {
   SiExpress,
   SiFastapi,
   SiTailwindcss,
-  SiCanva,
   SiPostman,
+  SiSimpleicons,
 } from "react-icons/si";
 
 import { VscVscode } from "react-icons/vsc";
@@ -69,8 +69,8 @@ const skillCategories = [
       { name: "GitHub", icon: <FaGithub />, level: 92 },
       { name: "Git", icon: <FaGitAlt />, level: 88 },
       { name: "Postman", icon: <SiPostman />, level: 90 },
-      { name: "VS Code", icon: <VscVscode />, level: 96,},
-      { name: "Canva", icon: <SiCanva />, level: 85 },
+      { name: "VS Code", icon: <VscVscode />, level: 96 },
+      { name: "Canva", icon: <SiSimpleicons />, level: 85 },
       { name: "Figma", icon: <FaFigma />, level: 80 },
     ],
   },
@@ -104,14 +104,7 @@ export default function Skills() {
             <motion.div
               key={i}
               whileHover={{ y: -8 }}
-              className="
-              bg-white/5
-              border border-white/10
-              rounded-[30px]
-              p-8
-              text-center
-              backdrop-blur-xl
-              "
+              className="bg-white/5 border border-white/10 rounded-[30px] p-8 text-center backdrop-blur-xl"
             >
               <h3 className="text-5xl font-black text-cyan-400">{item[0]}</h3>
 
@@ -127,13 +120,7 @@ export default function Skills() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6 }}
-              className="
-              bg-white/5
-              border border-white/10
-              rounded-[40px]
-              p-8
-              backdrop-blur-xl
-              "
+              className="bg-white/5 border border-white/10 rounded-[40px] p-8 backdrop-blur-xl"
             >
               <h2 className="text-3xl font-black text-cyan-400 mb-8">
                 {category.title}
@@ -147,12 +134,7 @@ export default function Skills() {
                       y: -8,
                       scale: 1.03,
                     }}
-                    className="
-                    bg-[#0d0d0d]
-                    border border-white/10
-                    rounded-3xl
-                    p-6
-                    "
+                    className="bg-[#0d0d0d] border border-white/10 rounded-3xl p-6"
                   >
                     <div className="flex items-center gap-4 mb-5">
                       <div className="text-4xl text-cyan-400">{skill.icon}</div>
@@ -173,13 +155,7 @@ export default function Skills() {
                           width: `${skill.level}%`,
                         }}
                         transition={{ duration: 1 }}
-                        className="
-                        h-full
-                        rounded-full
-                        bg-linear-to-r
-                        from-cyan-500
-                        to-teal-500
-                        "
+                        className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-teal-500"
                       />
                     </div>
                   </motion.div>

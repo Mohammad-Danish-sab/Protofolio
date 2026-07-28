@@ -1,7 +1,10 @@
-import api from "./api";
+import API from "./api";
 
-export async function login(credentials) {
-  const { data } = await api.post("/auth/login", credentials);
+export const login = async (data) => {
+  const res = await API.post("/auth/login", data);
+  return res.data;
+};
 
-  return data;
-}
+export const logout = () => {
+  localStorage.removeItem("admin_token");
+};
