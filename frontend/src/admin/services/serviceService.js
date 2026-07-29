@@ -1,37 +1,26 @@
-import api from "./api";
-
-/* ===========================
-   GET ALL SERVICES
-=========================== */
+import API from "./api";
 
 export const getServices = async () => {
-  const { data } = await api.get("/services");
-  return data;
+  const res = await API.get("/services");
+  return res.data;
 };
 
-/* ===========================
-   CREATE SERVICE
-=========================== */
-
-export const createService = async (serviceData) => {
-  const { data } = await api.post("/services", serviceData);
-  return data;
+export const getService = async (id) => {
+  const res = await API.get(`/services/${id}`);
+  return res.data;
 };
 
-/* ===========================
-   UPDATE SERVICE
-=========================== */
-
-export const updateService = async (id, serviceData) => {
-  const { data } = await api.put(`/services/${id}`, serviceData);
-  return data;
+export const createService = async (data) => {
+  const res = await API.post("/services", data);
+  return res.data;
 };
 
-/* ===========================
-   DELETE SERVICE
-=========================== */
+export const updateService = async (id, data) => {
+  const res = await API.put(`/services/${id}`, data);
+  return res.data;
+};
 
 export const deleteService = async (id) => {
-  const { data } = await api.delete(`/services/${id}`);
-  return data;
+  const res = await API.delete(`/services/${id}`);
+  return res.data;
 };

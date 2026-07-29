@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Integer, String, Text, Boolean
-from app.core.database import Base
+from sqlalchemy import Column, Integer, String, Text
+from app.database import Base
 
 
 class Service(Base):
@@ -7,12 +7,10 @@ class Service(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
-    title = Column(String(150), nullable=False)
+    title = Column(String(200), nullable=False)
 
     description = Column(Text, nullable=False)
 
-    icon = Column(String(100), nullable=True)
+    icon = Column(String(100), nullable=False)
 
-    color = Column(String(50), nullable=True)
-
-    featured = Column(Boolean, default=False)
+    color = Column(String(20), default="#06b6d4")

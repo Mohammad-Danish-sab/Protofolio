@@ -1,24 +1,19 @@
 from pydantic import BaseModel
-from typing import Optional
 
 
-class ServiceBase(BaseModel):
+class ServiceCreate(BaseModel):
+
     title: str
+
     description: str
-    icon: Optional[str] = None
-    color: Optional[str] = None
-    featured: bool = False
+
+    icon: str
+
+    color: str
 
 
-class ServiceCreate(ServiceBase):
-    pass
+class ServiceResponse(ServiceCreate):
 
-
-class ServiceUpdate(ServiceBase):
-    pass
-
-
-class ServiceResponse(ServiceBase):
     id: int
 
     class Config:
