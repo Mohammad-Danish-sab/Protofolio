@@ -1,22 +1,21 @@
 from pydantic import BaseModel
 
 
-class SkillBase(BaseModel):
+class SkillCreate(BaseModel):
+
     name: str
+
+    icon: str
+
     category: str
-    icon: str | None = None
+
     level: int
 
-
-class SkillCreate(SkillBase):
-    pass
+    color: str
 
 
-class SkillUpdate(SkillBase):
-    pass
+class SkillResponse(SkillCreate):
 
-
-class SkillResponse(SkillBase):
     id: int
 
     class Config:
