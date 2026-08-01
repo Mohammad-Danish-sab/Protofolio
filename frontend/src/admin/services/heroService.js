@@ -1,11 +1,16 @@
-import api from "./api";
+import API from "./api";
 
 export const getHero = async () => {
-  const res = await api.get("/hero");
+  const res = await API.get("/hero");
   return res.data;
 };
 
-export const updateHero = async (data) => {
-  const res = await api.put("/hero", data);
+export const updateHero = async (formData) => {
+  const res = await API.put("/hero", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
   return res.data;
 };
