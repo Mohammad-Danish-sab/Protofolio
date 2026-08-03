@@ -13,23 +13,21 @@ export default function AboutModal({ open, onClose, about, refreshAbout }) {
     try {
       setLoading(true);
 
-      if (about) {
+      if (about?.id) {
         await updateAbout(about.id, formData);
-
-        toast.success("About updated");
+        toast.success("About section updated successfully");
       } else {
         await createAbout(formData);
-
-        toast.success("About created");
+        toast.success("About section created successfully");
       }
 
       await refreshAbout();
 
       onClose();
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
 
-      toast.error("Something went wrong");
+      toast.error(error?.response?.data?.detail || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -39,8 +37,8 @@ export default function AboutModal({ open, onClose, about, refreshAbout }) {
     <Modal
       open={open}
       onClose={onClose}
-      title={about ? "Update About" : "Create About"}
-      size="xl"
+      title={about ? "Edit About Section" : "Add About Section"}
+      size="4xl"
     >
       <AboutForm
         initialData={about}
