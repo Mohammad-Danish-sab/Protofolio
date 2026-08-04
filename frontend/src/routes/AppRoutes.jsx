@@ -13,16 +13,26 @@ import Services from "../pages/Services";
 import Contact from "../pages/Contact";
 import NotFound from "../pages/NotFound";
 
-/* Admin */
+/* Admin Authentication */
 import Login from "../admin/pages/auth/Login";
+
+/* Admin Pages */
 import Dashboard from "../admin/pages/dashboard/Dashboard";
 import Hero from "../admin/pages/hero/Hero";
+import AdminAbout from "../admin/pages/about/About";
 import AdminProjects from "../admin/pages/projects/Projects";
 import AdminBlogs from "../admin/pages/blogs/Blogs";
 import AdminSkills from "../admin/pages/skills/Skills";
 import AdminServices from "../admin/pages/services/Services";
+import AdminExperience from "../admin/pages/experience/Experience";
+import AdminEducation from "../admin/pages/education/Education";
+import AdminTestimonials from "../admin/pages/testimonials/Testimonials";
+import ContactMessages from "../admin/pages/contact/ContactMessages";
+
+/* Protected Route */
 import ProtectedRoute from "../admin/routes/ProtectedRoute";
 
+/* Client Layout */
 function ClientLayout({ children }) {
   return (
     <div className="bg-[#020617] text-white min-h-screen overflow-x-hidden">
@@ -36,7 +46,7 @@ function ClientLayout({ children }) {
 export default function AppRoutes() {
   return (
     <Routes>
-      {/* Client */}
+      {/* ================= CLIENT ROUTES ================= */}
 
       <Route
         path="/"
@@ -92,11 +102,11 @@ export default function AppRoutes() {
         }
       />
 
-      {/* Admin Login */}
+      {/* ================= ADMIN LOGIN ================= */}
 
       <Route path="/admin/login" element={<Login />} />
 
-      {/* Protected Admin */}
+      {/* ================= PROTECTED ADMIN ROUTES ================= */}
 
       <Route
         path="/admin/dashboard"
@@ -112,6 +122,15 @@ export default function AppRoutes() {
         element={
           <ProtectedRoute>
             <Hero />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/about"
+        element={
+          <ProtectedRoute>
+            <AdminAbout />
           </ProtectedRoute>
         }
       />
@@ -152,7 +171,43 @@ export default function AppRoutes() {
         }
       />
 
-      {/* 404 */}
+      <Route
+        path="/admin/experience"
+        element={
+          <ProtectedRoute>
+            <AdminExperience />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/education"
+        element={
+          <ProtectedRoute>
+            <AdminEducation />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/testimonials"
+        element={
+          <ProtectedRoute>
+            <AdminTestimonials />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/contact"
+        element={
+          <ProtectedRoute>
+            <ContactMessages />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* ================= 404 ================= */}
 
       <Route
         path="*"

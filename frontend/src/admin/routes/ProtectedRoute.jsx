@@ -1,8 +1,19 @@
 import { Navigate } from "react-router-dom";
-import { isLoggedIn } from "../services/token";
+import { useAuth } from "../context/AuthContext";
+import Loader from "../components/common/Loader";
 
 export default function ProtectedRoute({ children }) {
-  if (!isLoggedIn()) {
+  const { loading, isAuthenticated } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#020617]">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
     return <Navigate to="/admin/login" replace />;
   }
 

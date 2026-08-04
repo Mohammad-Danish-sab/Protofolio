@@ -1,49 +1,59 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { loginAdmin } from "../services/auth";
+
+import * as authService from "../services/authService";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const token = localStorage.getItem("adminToken");
+  const login = async (credentials) => {
+    await authService.login(credentials);
 
-    if (token) {
-      setUser({ token });
-    }
+    const currentUser = await authService.getCurrentUser();
 
-    setLoading(false);
-  }, []);
+    setUser(currentUser);
+  };
 
-  const login = async (email, password) => {
-    const data = await loginAdmin({
-      email,
-      password,
-    });
-
-    localStorage.setItem("adminToken", data.access_token);
-
-    setUser({
-      token: data.access_token,
-    });
-
-    return data;
+  const register = async (userData) => {
+    return await authService.register(userData);
   };
 
   const logout = () => {
-    localStorage.removeItem("adminToken");
+    authService.logout();
+
     setUser(null);
   };
+
+  const refreshUser = async () => {
+    try {
+      const currentUser = await authService.getCurrentUser();
+
+      setUser(currentUser);
+    } catch (error) {
+      authService.logout();
+
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    refreshUser();
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         user,
+        loading,
         login,
         logout,
-        loading,
+        register,
+        refreshUser,
         isAuthenticated: !!user,
       }}
     >

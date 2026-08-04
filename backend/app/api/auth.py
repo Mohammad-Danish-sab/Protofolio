@@ -1,103 +1,63 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.core.security import (
-    hash_password,
-    verify_password,
-    create_access_token,
-)
-
-from app.models.user import User
-
 from app.schemas.user import (
     UserCreate,
+    UserLogin,
     UserResponse,
+    Token,
 )
-
-from app.schemas.auth import (
-    LoginRequest,
-    TokenResponse,
-)
+from app.services.auth_service import AuthService
+from app.dependencies.auth import get_current_user
 
 router = APIRouter(
-    prefix="/auth",
+    prefix="/api/auth",
     tags=["Authentication"],
 )
 
+
+# ----------------------------
+# Register
+# ----------------------------
 @router.post(
     "/register",
     response_model=UserResponse,
 )
 def register(
-    data: UserCreate,
+    user: UserCreate,
     db: Session = Depends(get_db),
 ):
-    existing = (
-        db.query(User)
-        .filter(User.email == data.email)
-        .first()
-    )
-
-    if existing:
-        raise HTTPException(
-            status_code=400,
-            detail="Email already exists",
-        )
-
-    user = User(
-        name=data.name,
-        email=data.email,
-        password=hash_password(data.password),
-        is_admin=True,
-    )
-
-    db.add(user)
-    db.commit()
-    db.refresh(user)
-
-    return user
+    return AuthService.register(db, user)
 
 
+# ----------------------------
+# Login
+# ----------------------------
 @router.post(
     "/login",
-    response_model=TokenResponse,
+    response_model=Token,
 )
 def login(
-    data: LoginRequest,
+    user: UserLogin,
     db: Session = Depends(get_db),
 ):
-    user = (
-        db.query(User)
-        .filter(User.email == data.email)
-        .first()
-    )
-
-    if not user:
-        raise HTTPException(
-            status_code=401,
-            detail="Invalid email or password",
-        )
-
-    if not verify_password(
-        data.password,
-        user.password,
-    ):
-        raise HTTPException(
-            status_code=401,
-            detail="Invalid email or password",
-        )
-
-    token = create_access_token(
-        {
-            "sub": str(user.id),
-            "email": user.email,
-            "is_admin": user.is_admin,
-        }
-    )
+    result = AuthService.login(db, user)
 
     return {
-        "access_token": token,
+        "access_token": result["access_token"],
         "token_type": "bearer",
     }
 
+
+# ----------------------------
+# Current User
+# ----------------------------
+@router.get(
+    "/me",
+    response_model=UserResponse,
+)
+def get_me(
+    current_user=Depends(get_current_user),
+):
+    return current_user

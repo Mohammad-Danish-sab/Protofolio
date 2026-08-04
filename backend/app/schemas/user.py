@@ -1,22 +1,61 @@
 from pydantic import BaseModel, EmailStr
+from typing import Optional
 
 
-class UserCreate(BaseModel):
-    name: str
+# -------------------------
+# Base Schema
+# -------------------------
+class UserBase(BaseModel):
+    full_name: str
     email: EmailStr
+
+
+# -------------------------
+# Register
+# -------------------------
+class UserCreate(UserBase):
     password: str
 
 
+# -------------------------
+# Login
+# -------------------------
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
 
-class UserResponse(BaseModel):
+# -------------------------
+# Update Profile
+# -------------------------
+class UserUpdate(BaseModel):
+    full_name: Optional[str] = None
+    email: Optional[EmailStr] = None
+    password: Optional[str] = None
+
+
+# -------------------------
+# Response
+# -------------------------
+class UserResponse(UserBase):
     id: int
-    name: str
-    email: EmailStr
-    is_admin: bool
+    role: str
+    is_active: bool
 
     class Config:
         from_attributes = True
+
+
+# -------------------------
+# JWT Token
+# -------------------------
+class Token(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+
+
+# -------------------------
+# Token Payload
+# -------------------------
+class TokenData(BaseModel):
+    email: Optional[str] = None

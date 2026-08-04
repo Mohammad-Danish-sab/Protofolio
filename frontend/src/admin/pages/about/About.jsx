@@ -1,98 +1,74 @@
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
-import Input from "../common/Input";
-import TextArea from "../common/TextArea";
-import Button from "../common/Button";
+import AboutForm from "../../components/about/AboutForm";
+import DashboardLayout from "../../components/layout/DashboardLayout";
+import PageHeader from "../../components/common/PageHeader";
+import Loader from "../../components/common/Loader";
 
-export default function AboutForm({ initialData, onSubmit, loading }) {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      title: "",
-      subtitle: "",
-      description: "",
-      image: "",
-      resume_link: "",
-      experience: "",
-      projects: "",
-      clients: "",
-      coffee: "",
-    },
-  });
+import aboutService from "../../services/aboutService";
+
+export default function About() {
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [about, setAbout] = useState(null);
+
+  const fetchAbout = async () => {
+    try {
+      setLoading(true);
+
+      const data = await aboutService.getAbout();
+
+      setAbout(data);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to load About information");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    if (initialData) {
-      reset(initialData);
+    fetchAbout();
+  }, []);
+
+  const handleSubmit = async (formData) => {
+    try {
+      setSaving(true);
+
+      const response = await aboutService.saveAbout(formData);
+
+      setAbout(response);
+
+      toast.success("About section updated successfully.");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to update About section.");
+    } finally {
+      setSaving(false);
     }
-  }, [initialData, reset]);
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <Input
-        label="Title"
-        placeholder="About Me"
-        {...register("title", {
-          required: "Title is required",
-        })}
-        error={errors.title?.message}
-      />
-
-      <Input
-        label="Subtitle"
-        placeholder="Full Stack Developer"
-        {...register("subtitle")}
-      />
-
-      <TextArea
-        label="Description"
-        rows={6}
-        placeholder="Write about yourself..."
-        {...register("description", {
-          required: "Description is required",
-        })}
-        error={errors.description?.message}
-      />
-
-      <Input
-        label="Image URL"
-        placeholder="https://..."
-        {...register("image")}
-      />
-
-      <Input
-        label="Resume URL"
-        placeholder="https://..."
-        {...register("resume_link")}
-      />
-
-      <div className="grid md:grid-cols-2 gap-5">
-        <Input
-          type="number"
-          label="Experience (Years)"
-          {...register("experience")}
+    <DashboardLayout>
+      <div className="space-y-6">
+        <PageHeader
+          title="About"
+          subtitle="Manage your portfolio About section."
         />
 
-        <Input type="number" label="Projects" {...register("projects")} />
-
-        <Input type="number" label="Happy Clients" {...register("clients")} />
-
-        <Input type="number" label="Coffee Cups" {...register("coffee")} />
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <AboutForm
+              initialData={about}
+              onSubmit={handleSubmit}
+              loading={saving}
+            />
+          </div>
+        )}
       </div>
-
-      <div className="flex justify-end">
-        <Button type="submit" disabled={loading}>
-          {loading
-            ? "Saving..."
-            : initialData
-              ? "Update About"
-              : "Create About"}
-        </Button>
-      </div>
-    </form>
+    </DashboardLayout>
   );
 }
