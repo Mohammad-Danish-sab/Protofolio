@@ -1,10 +1,12 @@
-from pydantic import BaseModel, EmailStr
 from typing import Optional
+
+from pydantic import BaseModel, EmailStr
 
 
 # -------------------------
 # Base Schema
 # -------------------------
+
 class UserBase(BaseModel):
     full_name: str
     email: EmailStr
@@ -13,6 +15,7 @@ class UserBase(BaseModel):
 # -------------------------
 # Register
 # -------------------------
+
 class UserCreate(UserBase):
     password: str
 
@@ -20,6 +23,7 @@ class UserCreate(UserBase):
 # -------------------------
 # Login
 # -------------------------
+
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
@@ -28,6 +32,7 @@ class UserLogin(BaseModel):
 # -------------------------
 # Update Profile
 # -------------------------
+
 class UserUpdate(BaseModel):
     full_name: Optional[str] = None
     email: Optional[EmailStr] = None
@@ -37,6 +42,7 @@ class UserUpdate(BaseModel):
 # -------------------------
 # Response
 # -------------------------
+
 class UserResponse(UserBase):
     id: int
     role: str
@@ -49,6 +55,7 @@ class UserResponse(UserBase):
 # -------------------------
 # JWT Token
 # -------------------------
+
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
@@ -57,5 +64,6 @@ class Token(BaseModel):
 # -------------------------
 # Token Payload
 # -------------------------
+
 class TokenData(BaseModel):
     email: Optional[str] = None
