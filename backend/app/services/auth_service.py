@@ -28,10 +28,10 @@ class AuthService:
             )
 
         new_user = User(
-            full_name=user.full_name,
+            name=user.full_name,
             email=user.email,
             password=hash_password(user.password),
-            role="admin",
+            is_admin=True,
         )
 
         db.add(new_user)
@@ -43,22 +43,41 @@ class AuthService:
     @staticmethod
     def login(db: Session, user: UserLogin):
 
+        print("=" * 60)
+        print("Email Entered:", user.email)
+
+        users = db.query(User).all()
+
+        print("All Users:")
+        for u in users:
+            print(
+                f"ID={u.id}, "
+                f"NAME={u.name}, "
+                f"EMAIL={u.email}"
+            )
+
         db_user = (
             db.query(User)
             .filter(User.email == user.email)
             .first()
         )
 
-        if not db_user:
+        print("User Found:", db_user)
+
+        if db_user is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Invalid email or password",
             )
 
-        if not verify_password(
+        valid = verify_password(
             user.password,
             db_user.password,
-        ):
+        )
+
+        print("Password Match:", valid)
+
+        if not valid:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Invalid email or password",
@@ -68,7 +87,7 @@ class AuthService:
             data={
                 "sub": db_user.email,
                 "id": db_user.id,
-                "role": db_user.role,
+                "is_admin": db_user.is_admin,
             }
         )
 
