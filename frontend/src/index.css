@@ -1,11 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  body {
-    @apply bg-navy-900 text-gray-100 font-sans antialiased selection:bg-cyan-500 selection:text-black;
-  }
+@theme {
+  --color-navy-900: #030712;
+  --color-navy-800: #0b0f19;
+  --color-navy-700: #111827;
+
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #06b6d4;
+
+  --color-violet-500: #8b5cf6;
+  --color-violet-600: #7c3aed;
+
+  --shadow-glow-cyan: 0 0 20px -3px rgba(34, 211, 238, 0.3);
+  --shadow-glow-purple: 0 0 20px -3px rgba(139, 92, 246, 0.3);
+}
+
+body {
+  background-color: #030712;
+  color: #f3f4f6;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 .glass-panel {
@@ -13,20 +26,4 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.gradient-border {
-  position: relative;
-  background-clip: padding-box;
-  border: 1px solid transparent;
-}
-
-.gradient-border::before {
-  content: '';
-  position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  z-index: -1;
-  margin: -1px;
-  border-radius: inherit;
-  background: linear-gradient(to right, #22d3ee, #8b5cf6);
 }
