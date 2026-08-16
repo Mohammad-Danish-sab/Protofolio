@@ -37,7 +37,7 @@ export const Navbar = () => {
             <Code2 size={20} />
           </div>
           <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-            DEV<span className="text-cyan-400">.AI</span>
+            CodeWith<span className="text-cyan-400">Danish</span>
           </span>
         </a>
 

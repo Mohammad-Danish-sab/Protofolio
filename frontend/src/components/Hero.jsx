@@ -6,11 +6,11 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-[#FFF5EE]"
     >
       {/* Dynamic Background Effects */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-10 w-[400px] h-[400px] bg-violet-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-[#DEDBD4] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-10 w-100 h-100 bg-[#DEDBD4] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 text-center md:text-left grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
         <motion.div
