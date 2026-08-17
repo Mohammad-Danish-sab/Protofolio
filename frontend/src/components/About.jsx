@@ -2,38 +2,62 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Download, Briefcase, Award, Cpu } from "lucide-react";
 
+// Image now served from the public/ folder — no bundler import needed.
+// Place your photo at: frontend/public/profile.jpg
+const profile = "/profile.jpg";
+
 const stats = [
-  { label: "Projects Completed", value: "10+", icon: Award },
-  { label: "Years Experience", value: "3+", icon: Briefcase },
-  { label: "Core Tech Stack", value: "8+", icon: Cpu },
+  {
+    label: "Projects Completed",
+    value: "20+",
+    icon: Award,
+  },
+  {
+    label: "Technologies",
+    value: "12+",
+    icon: Briefcase,
+  },
+  {
+    label: "Core Skills",
+    value: "8+",
+    icon: Cpu,
+  },
 ];
 
 export const About = () => {
   return (
-    <section id="about" className="py-24 relative">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Image with Gradient Frame */}
+    <section id="about" className="relative bg-[#faf9f7] py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+          {/* ================= IMAGE ================= */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 flex justify-center"
+            className="flex justify-center lg:col-span-5"
           >
-            <div className="relative group">
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-cyan-400 to-violet-600 blur opacity-40 group-hover:opacity-75 transition duration-500" />
-              <div className="relative rounded-2xl overflow-hidden glass-panel border border-gray-800 p-2">
+            <div className="group relative">
+              {/* Glow */}
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-red-400 to-yellow-600 opacity-40 blur transition duration-500 group-hover:opacity-75" />
+
+              {/* Image Container */}
+              <div className="relative overflow-hidden rounded-2xl border border-gray-700 bg-gray-900 p-2 shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
-                  alt="Developer Profile"
-                  className="w-full max-w-sm rounded-xl object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                  src={profile}
+                  alt="Mohammad Danish - Full Stack Developer"
+                  className="h-115 w-full max-w-sm rounded-xl object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src =
+                      "https://placehold.co/400x420?text=Add+profile.jpg";
+                  }}
                 />
               </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Bio & Stats */}
+          {/* ================= CONTENT ================= */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -41,38 +65,51 @@ export const About = () => {
             transition={{ duration: 0.6 }}
             className="lg:col-span-7"
           >
-            <h2 className="text-xs font-semibold text-cyan-400 uppercase tracking-widest mb-3">
+            {/* Small Heading */}
+            <h2 className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-[#B95712]">
               About Me
             </h2>
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
+
+            {/* Main Heading */}
+            <h3 className="mb-6 text-3xl font-bold text-[#B85C38] md:text-4xl">
               Engineering Intelligent Web Platforms & AI Automations
             </h3>
 
-            <p className="text-gray-400 leading-relaxed mb-6">
-              I am a Full Stack Developer and AI Systems Engineer passionate
-              about bridging high-performance web applications with modern
-              machine learning workflows.
-            </p>
-            <p className="text-gray-400 leading-relaxed mb-8">
-              My core focus is delivering production-grade architectures using
-              React, FastAPI, Python, and PostgreSQL—creating responsive
-              frontend experiences backed by robust, scalable microservices.
+            {/* Description */}
+            <p className="mb-6 leading-relaxed text-[#302016] text-lg">
+              I am a Full Stack Developer passionate about building scalable web
+              applications, intelligent AI solutions, and full-stack automation
+              platforms that solve real-world problems. I focus on creating
+              modern, high-performance, and user-centric applications with clean
+              architecture and scalable design principles. Currently, I’m
+              exploring Artificial Intelligence, Generative AI, backend
+              engineering, automation, and scalable system design to build
+              innovative, efficient, and future-ready digital solutions.
             </p>
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-3 gap-4 mb-8">
+            <p className="mb-8 leading-relaxed text-[#302016] text-lg">
+              My focus is on creating modern, high-performance applications
+              using React, Python, FastAPI, Node.js, and databases while
+              exploring Generative AI, automation, and intelligent systems.
+            </p>
+
+            {/* ================= STATS ================= */}
+            <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
               {stats.map((stat) => {
                 const Icon = stat.icon;
+
                 return (
                   <div
                     key={stat.label}
-                    className="glass-panel p-4 rounded-xl border border-gray-800 text-center"
+                    className="rounded-xl border border-gray-200 bg-[#97A26A] p-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                   >
-                    <Icon size={20} className="text-cyan-400 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-white">
+                    <Icon size={25} className="mx-auto mb-2 text-red-500" />
+
+                    <div className="text-2xl font-bold text-[#FFFFF0]">
                       {stat.value}
                     </div>
-                    <div className="text-xs text-gray-400 mt-1">
+
+                    <div className="mt-1 text-xs text-[#e4e8d1]">
                       {stat.label}
                     </div>
                   </div>
@@ -80,19 +117,24 @@ export const About = () => {
               })}
             </div>
 
-            {/* Buttons */}
+            {/* ================= BUTTONS ================= */}
             <div className="flex flex-wrap gap-4">
+              {/* Hire Me */}
               <a
                 href="#contact"
-                className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-violet-600 text-white font-semibold hover:opacity-90 transition-opacity"
+                className="rounded-xl bg-gradient-to-r from-cyan-500 to-violet-600 px-6 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:opacity-90"
               >
                 Hire Me
               </a>
+
+              {/* Resume */}
               <a
-                href="#"
-                className="px-6 py-3 rounded-xl glass-panel text-gray-300 font-semibold border border-gray-800 hover:text-white flex items-center gap-2 transition-all"
+                href="/resume.pdf"
+                download
+                className="flex items-center gap-2 rounded-xl border border-gray-300 bg-white px-6 py-3 font-semibold text-gray-700 transition-all duration-300 hover:scale-105 hover:border-cyan-400 hover:text-cyan-600"
               >
-                <Download size={18} /> Download Resume
+                <Download size={18} />
+                Download Resume
               </a>
             </div>
           </motion.div>
@@ -101,3 +143,5 @@ export const About = () => {
     </section>
   );
 };
+
+export default About;
