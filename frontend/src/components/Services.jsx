@@ -31,7 +31,7 @@ const services = [
 
 export const Services = () => {
   return (
-    <section id="services" className="py-24 relative">
+    <section id="services" className="py-24 relative bg-[#faf9f7]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-xs font-semibold text-cyan-400 uppercase tracking-widest mb-3">

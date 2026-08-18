@@ -29,7 +29,6 @@ export const About = () => {
     <section id="about" className="relative bg-[#faf9f7] py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-          {/* ================= IMAGE ================= */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -38,10 +37,8 @@ export const About = () => {
             className="flex justify-center lg:col-span-5"
           >
             <div className="group relative">
-              {/* Glow */}
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-red-400 to-yellow-600 opacity-40 blur transition duration-500 group-hover:opacity-75" />
+              <div className="absolute -inset-1 rounded-2xl bg-linear-to-r from-red-400 to-yellow-600 opacity-40 blur transition duration-500 group-hover:opacity-75" />
 
-              {/* Image Container */}
               <div className="relative overflow-hidden rounded-2xl border border-gray-700 bg-gray-900 p-2 shadow-2xl">
                 <img
                   src={profile}
@@ -57,7 +54,6 @@ export const About = () => {
             </div>
           </motion.div>
 
-          {/* ================= CONTENT ================= */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -65,17 +61,14 @@ export const About = () => {
             transition={{ duration: 0.6 }}
             className="lg:col-span-7"
           >
-            {/* Small Heading */}
-            <h2 className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-[#B95712]">
+            {/* <h2 className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-[#B95712]">
               About Me
-            </h2>
+            </h2> */}
 
-            {/* Main Heading */}
             <h3 className="mb-6 text-3xl font-bold text-[#B85C38] md:text-4xl">
               Engineering Intelligent Web Platforms & AI Automations
             </h3>
 
-            {/* Description */}
             <p className="mb-6 leading-relaxed text-[#302016] text-lg">
               I am a Full Stack Developer passionate about building scalable web
               applications, intelligent AI solutions, and full-stack automation
@@ -93,7 +86,6 @@ export const About = () => {
               exploring Generative AI, automation, and intelligent systems.
             </p>
 
-            {/* ================= STATS ================= */}
             <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
               {stats.map((stat) => {
                 const Icon = stat.icon;
@@ -117,21 +109,18 @@ export const About = () => {
               })}
             </div>
 
-            {/* ================= BUTTONS ================= */}
             <div className="flex flex-wrap gap-4">
-              {/* Hire Me */}
               <a
                 href="#contact"
-                className="rounded-xl bg-gradient-to-r from-cyan-500 to-violet-600 px-6 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:opacity-90"
+                className="rounded-xl bg-linear-to-r from-[#ff849c] to-[#ffce9f] px-6 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:opacity-90"
               >
                 Hire Me
               </a>
 
-              {/* Resume */}
               <a
                 href="/resume.pdf"
                 download
-                className="flex items-center gap-2 rounded-xl border border-gray-300 bg-white px-6 py-3 font-semibold text-gray-700 transition-all duration-300 hover:scale-105 hover:border-cyan-400 hover:text-cyan-600"
+                className="flex items-center gap-2 rounded-xl border border-gray-300 bg-[#B65950] px-6 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:border-cyan-400 hover:text-cyan-600"
               >
                 <Download size={18} />
                 Download Resume
