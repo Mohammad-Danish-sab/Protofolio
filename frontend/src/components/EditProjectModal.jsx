@@ -11,7 +11,7 @@ export const EditProjectModal = ({
   onProjectUpdated,
 }) => {
   const [formData, setFormData] = useState({
-    admin_key: "",
+    admin_key: import.meta.env.VITE_ADMIN_SECRET_KEY || "",
     title: "",
     description: "",
     category: "Full Stack",
@@ -25,7 +25,7 @@ export const EditProjectModal = ({
   useEffect(() => {
     if (project) {
       setFormData({
-        admin_key: "",
+        admin_key: import.meta.env.VITE_ADMIN_SECRET_KEY || "",
         title: project.title || "",
         description: project.description || "",
         category: project.category || "Full Stack",

@@ -3,7 +3,9 @@ import { X, Upload, Lock } from "lucide-react";
 import { createProject } from "../services/api";
 
 export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
-  const [adminKey, setAdminKey] = useState("");
+  const [adminKey, setAdminKey] = useState(
+    import.meta.env.VITE_ADMIN_SECRET_KEY || "",
+  );
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("Full Stack");
@@ -24,16 +26,13 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
 
     try {
       const formData = new FormData();
-      formData.append("admin_key", adminKey); // Uses state input value
+      formData.append("admin_key", adminKey);
       formData.append("title", title);
       formData.append("description", description);
       formData.append("category", category);
 
-      const techArray = technologies
-        .split(",")
-        .map((t) => t.trim())
-        .filter(Boolean);
-      formData.append("technologies", JSON.stringify(techArray));
+      // Pass the raw string directly; the backend will parse it into a Python list
+      formData.append("technologies", technologies);
 
       if (githubUrl) formData.append("github_url", githubUrl);
       if (liveUrl) formData.append("live_url", liveUrl);
@@ -59,16 +58,16 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto text-red-700">
       <div className="bg-white rounded-3xl p-6 md:p-8 w-full max-w-xl shadow-2xl my-8 relative">
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 text-red-900 hover:text-gray-700"
+          className="absolute top-6 right-6 text-red-900 hover:text-red-700"
         >
           <X size={20} />
         </button>
 
-        <h2 className="text-2xl font-bold mb-4 text-red-900 flex items-center gap-2">
+        <h2 className="text-2xl font-bold mb-4 text-[#B95712] flex items-center gap-2">
           <Lock size={22} className="text-[#B95712]" /> Admin Upload
         </h2>
 
@@ -80,28 +79,28 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-red-600 mb-1">
+            <label className="block text-xs font-semibold text-gray-700 mb-1">
               Admin Security Passcode *
             </label>
             <input
               type="password"
               required
               placeholder="Default: admin123"
-              className="w-full p-3 border border-red-200 rounded-xl text-sm outline-none focus:border-red-500 bg-red-50/30 text-red-600 font-medium placeholder-gray-400"
+              className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] bg-gray-50 font-medium placeholder-gray-400"
               value={adminKey}
               onChange={(e) => setAdminKey(e.target.value)}
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-red-700 mb-1">
+            <label className="block text-xs font-semibold text-gray-700 mb-1">
               Project Title *
             </label>
             <input
               type="text"
               required
-              placeholder="e.g. Portfolio Website"
-              className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] text-red-600 font-medium placeholder-gray-400"
+              placeholder="e.g. Insurance Premium Predictor"
+              className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] font-medium placeholder-gray-400"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -113,7 +112,7 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
                 Category
               </label>
               <select
-                className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] bg-white text-red-600 font-medium"
+                className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] bg-white font-medium"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
@@ -129,8 +128,8 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
               </label>
               <input
                 type="text"
-                placeholder="React, FastAPI, PostgreSQL"
-                className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] text-red-600 font-medium placeholder-gray-400"
+                placeholder="React, FastAPI, Tailwind CSS, MongoDB"
+                className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] font-medium placeholder-gray-400"
                 value={technologies}
                 onChange={(e) => setTechnologies(e.target.value)}
               />
@@ -145,7 +144,7 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
               required
               rows={3}
               placeholder="Project explanation..."
-              className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] text-red-600 font-medium placeholder-gray-400"
+              className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] font-medium placeholder-gray-400"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -158,7 +157,7 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
             <input
               type="file"
               accept="image/*"
-              className="w-full p-2 border border-gray-200 rounded-xl text-sm text-red-600"
+              className="w-full p-2 border border-gray-200 rounded-xl text-sm text-gray-600"
               onChange={(e) => setCoverFile(e.target.files[0])}
             />
           </div>
@@ -171,7 +170,7 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
               type="file"
               accept="image/*"
               multiple
-              className="w-full p-2 border border-gray-200 rounded-xl text-sm text-red-600"
+              className="w-full p-2 border border-gray-200 rounded-xl text-sm text-gray-600"
               onChange={(e) => setScreenshotFiles(Array.from(e.target.files))}
             />
           </div>
@@ -180,14 +179,14 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
             <input
               type="url"
               placeholder="GitHub Repo URL"
-              className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] text-red-600 font-medium placeholder-gray-400"
+              className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] font-medium placeholder-gray-400"
               value={githubUrl}
               onChange={(e) => setGithubUrl(e.target.value)}
             />
             <input
               type="url"
               placeholder="Live Demo URL"
-              className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] text-red-600 font-medium placeholder-gray-400"
+              className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] font-medium placeholder-gray-400"
               value={liveUrl}
               onChange={(e) => setLiveUrl(e.target.value)}
             />

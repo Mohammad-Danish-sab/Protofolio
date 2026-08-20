@@ -91,7 +91,7 @@ export const Skills = () => {
                   {cat.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3.5 py-1.5 rounded-lg bg-[#030712] text-gray-300 border border-gray-800 text-sm font-medium hover:border-violet-500/50 hover:text-cyan-300 transition-all cursor-default"
+                      className="px-3.5 py-1.5 rounded-lg bg-[#B85C38] text-white text-sm font-medium hover:text-black transition-all cursor-default"
                     >
                       {skill}
                     </span>

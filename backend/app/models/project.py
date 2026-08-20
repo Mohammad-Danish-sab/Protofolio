@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Text, JSON
+from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy.dialects.postgresql import ARRAY
 from app.core.database import Base
 
 class Project(Base):
@@ -8,8 +9,10 @@ class Project(Base):
     title = Column(String, nullable=False)
     description = Column(Text, nullable=False)
     category = Column(String, nullable=False)
-    technologies = Column(JSON, default=[])
+    
+    # Use PostgreSQL ARRAY of String instead of JSON
+    technologies = Column(ARRAY(String), nullable=False)
     github_url = Column(String, nullable=True)
     live_url = Column(String, nullable=True)
     image_url = Column(String, nullable=True)
-    screenshots = Column(JSON, default=[])
+    screenshots = Column(ARRAY(String), nullable=True)

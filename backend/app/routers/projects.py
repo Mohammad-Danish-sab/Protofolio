@@ -1,24 +1,25 @@
+import json
 import os
 import shutil
 import uuid
-import json
 from typing import List, Optional
-from fastapi import APIRouter, Depends, HTTPException, status, Form, UploadFile, File
+
+from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
 from sqlalchemy.orm import Session
 
+from app.core.config import settings
 from app.core.database import get_db
 from app.models.project import Project
 from app.schemas.project import ProjectResponse
 
 router = APIRouter(prefix="/api/v1/projects", tags=["Projects"])
 
-ADMIN_SECRET_KEY = os.getenv("ADMIN_SECRET_KEY", "admin123")
 UPLOAD_DIR = "static/uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 
 def save_file(file: UploadFile) -> str:
-    """Saves uploaded file and returns path."""
+    """Saves uploaded file and returns accessible static path."""
     file_ext = os.path.splitext(file.filename)[1]
     filename = f"{uuid.uuid4()}{file_ext}"
     file_path = os.path.join(UPLOAD_DIR, filename)
@@ -29,14 +30,32 @@ def save_file(file: UploadFile) -> str:
 
 def verify_admin_key(admin_key: str):
     """Admin passcode verification helper."""
-    if admin_key != ADMIN_SECRET_KEY:
+    if admin_key != settings.ADMIN_SECRET_KEY:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid Admin Passcode. Action not permitted."
+            detail="Invalid Admin Passcode. Action not permitted.",
         )
 
 
+def parse_technologies(technologies_input: str) -> List[str]:
+    """Converts JSON array strings or comma-separated strings into a Python List[str]."""
+    if not technologies_input:
+        return []
+
+    # Attempt to parse as JSON first
+    try:
+        parsed = json.loads(technologies_input)
+        if isinstance(parsed, list):
+            return [str(item).strip() for item in parsed if str(item).strip()]
+    except (json.JSONDecodeError, TypeError):
+        pass
+
+    # Fallback to comma-separated string parsing
+    return [t.strip() for t in str(technologies_input).split(",") if t.strip()]
+
+
 # --- PUBLIC ROUTES ---
+
 
 @router.get("", response_model=List[ProjectResponse])
 @router.get("/", response_model=List[ProjectResponse])
@@ -57,8 +76,13 @@ def get_project_by_id(project_id: int, db: Session = Depends(get_db)):
 
 # --- ADMIN-ONLY ROUTES ---
 
-@router.post("", response_model=ProjectResponse, status_code=status.HTTP_201_CREATED)
-@router.post("/", response_model=ProjectResponse, status_code=status.HTTP_201_CREATED)
+
+@router.post(
+    "", response_model=ProjectResponse, status_code=status.HTTP_201_CREATED
+)
+@router.post(
+    "/", response_model=ProjectResponse, status_code=status.HTTP_201_CREATED
+)
 async def create_project(
     admin_key: str = Form(...),
     title: str = Form(...),
@@ -69,28 +93,25 @@ async def create_project(
     live_url: Optional[str] = Form(None),
     image: Optional[UploadFile] = File(None),
     screenshots: List[UploadFile] = File(default=[]),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     verify_admin_key(admin_key)
 
-    try:
-        parsed_tech = json.loads(technologies) if isinstance(technologies, str) else technologies
-        tech_list = [str(item).strip() for item in parsed_tech if item] if isinstance(parsed_tech, list) else [t.strip() for t in str(technologies).split(",") if t.strip()]
-    except (json.JSONDecodeError, TypeError):
-        tech_list = [t.strip() for t in str(technologies).split(",") if t.strip()]
-
+    tech_list = parse_technologies(technologies)
     image_url = save_file(image) if image and image.filename else None
-    screenshot_urls = [save_file(shot) for shot in screenshots if shot and shot.filename]
+    screenshot_urls = [
+        save_file(shot) for shot in screenshots if shot and shot.filename
+    ]
 
     db_project = Project(
         title=title,
         description=description,
         category=category,
-        technologies=tech_list,
+        technologies=tech_list,  # Passes native Python list
         github_url=github_url,
         live_url=live_url,
         image_url=image_url,
-        screenshots=screenshot_urls
+        screenshots=screenshot_urls,  # Passes native Python list
     )
 
     db.add(db_project)
@@ -111,7 +132,7 @@ async def update_project(
     live_url: Optional[str] = Form(None),
     image: Optional[UploadFile] = File(None),
     screenshots: List[UploadFile] = File(default=[]),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     verify_admin_key(admin_key)
 
@@ -119,11 +140,7 @@ async def update_project(
     if not project:
         raise HTTPException(status_code=404, detail="Project not found")
 
-    try:
-        parsed_tech = json.loads(technologies) if isinstance(technologies, str) else technologies
-        tech_list = [str(item).strip() for item in parsed_tech if item] if isinstance(parsed_tech, list) else [t.strip() for t in str(technologies).split(",") if t.strip()]
-    except (json.JSONDecodeError, TypeError):
-        tech_list = [t.strip() for t in str(technologies).split(",") if t.strip()]
+    tech_list = parse_technologies(technologies)
 
     project.title = title
     project.description = description
@@ -135,7 +152,9 @@ async def update_project(
     if image and image.filename:
         project.image_url = save_file(image)
 
-    valid_screenshots = [shot for shot in screenshots if shot and shot.filename]
+    valid_screenshots = [
+        shot for shot in screenshots if shot and shot.filename
+    ]
     if valid_screenshots:
         project.screenshots = [save_file(shot) for shot in valid_screenshots]
 
@@ -148,7 +167,7 @@ async def update_project(
 def delete_project(
     project_id: int,
     admin_key: str = Form(...),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     verify_admin_key(admin_key)
 
