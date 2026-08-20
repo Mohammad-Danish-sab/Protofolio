@@ -22,7 +22,7 @@ body {
 }
 
 .glass-panel {
-  background: rgba(11, 15, 25, 0.7);
+  background: #C6D0C7;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);

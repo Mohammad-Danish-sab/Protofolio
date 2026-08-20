@@ -11,13 +11,13 @@ const services = [
   },
   {
     icon: Bot,
-    title: "AI / Machine Learning",
+    title: "Backend",
     description:
-      "Integrating custom computer vision, NLP models, and AI pipelines into business systems.",
+      "Building modern, high-performance web applications using Node.js, Express.js, and FastAPI.",
   },
   {
     icon: Workflow,
-    title: "AI Automation",
+    title: "AI",
     description:
       "Automating repetitive workflows using Python, custom microservices, and asynchronous tasks.",
   },
@@ -34,10 +34,10 @@ export const Services = () => {
     <section id="services" className="py-24 relative bg-[#faf9f7]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-xs font-semibold text-cyan-400 uppercase tracking-widest mb-3">
+          {/* <h2 className="text-xs font-semibold text-cyan-400 uppercase tracking-widest mb-3">
             Offerings
-          </h2>
-          <h3 className="text-3xl md:text-5xl font-bold text-white">
+          </h2> */}
+          <h3 className="text-3xl md:text-5xl font-bold text-[#B65950]">
             Services & Capabilities
           </h3>
         </div>
@@ -54,13 +54,13 @@ export const Services = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="glass-panel p-8 rounded-2xl border border-gray-800 hover:border-violet-500/50 transition-all duration-300 group hover:-translate-y-1"
               >
-                <div className="p-4 rounded-xl bg-gradient-to-br from-cyan-500/10 to-violet-500/10 text-cyan-400 border border-cyan-500/20 w-fit mb-6 group-hover:scale-110 transition-transform">
+                <div className="p-4 rounded-xl bg-linear-to-br from-cyan-500/10 to-violet-500/10 text-red-500 border border-cyan-500/20 w-fit mb-6 group-hover:scale-110 transition-transform">
                   <ServiceIcon size={26} />
                 </div>
                 <h4 className="text-xl font-bold text-white mb-3">
                   {service.title}
                 </h4>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-gray-300 text-sm leading-relaxed">
                   {service.description}
                 </p>
               </motion.div>

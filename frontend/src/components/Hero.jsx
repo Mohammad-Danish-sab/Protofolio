@@ -18,8 +18,8 @@ export const Hero = () => {
           transition={{ duration: 0.8 }}
           className="md:col-span-7"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel border border-cyan-500/30 text-[#CABFDF] text-xs font-semibold uppercase tracking-widest mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#CABFDF] animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#5c4134] border border-cyan-500/30 text-[#f5f6fa] text-xs font-semibold uppercase tracking-widest mb-6">
+            <span className="w-2 h-2 rounded-full bg-[#f5f6fa] animate-pulse" />
             Hello, I'm Danish
           </div>
 
@@ -51,7 +51,7 @@ export const Hero = () => {
             </a>
             <a
               href="#contact"
-              className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel text-gray-300 font-semibold hover:text-white hover:border-gray-600 transition-all text-center"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#B95712] text-[#f5f6fa] font-semibold hover:text-white hover:border-gray-600 transition-all text-center"
             >
               Contact Me
             </a>
@@ -65,14 +65,14 @@ export const Hero = () => {
           className="md:col-span-5"
         >
           <div className="relative rounded-2xl p-1 bg-linear-to-b from-red-100 via-yellow-50 to-transparent">
-            <div className="glass-panel rounded-xl p-6 border border-gray-800 shadow-2xl">
+            <div className="bg-[#494B57] rounded-xl p-6 border border-gray-800 shadow-2xl">
               <div className="flex items-center justify-between border-b border-gray-800 pb-4 mb-4">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
-                <div className="flex items-center gap-2 text-xs text-gray-500 font-mono">
+                <div className="flex items-center gap-2 text-xs text-[#e4e8d1] font-mono">
                   <Terminal size={14} /> portfolio.py
                 </div>
               </div>

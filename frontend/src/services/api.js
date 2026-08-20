@@ -1,15 +1,26 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:8000/api/v1",
-  headers: {
-    "Content-Type": "application/json",
-  },
+  baseURL: import.meta.env.VITE_API_BASE_URL
+    ? `${import.meta.env.VITE_API_BASE_URL}/api/v1`
+    : "http://127.0.0.1:8000/api/v1",
 });
 
-export const fetchProjects = (category) =>
-  API.get("/projects", { params: category ? { category } : {} });
+// Fetch all projects (with optional category filter)
+export const fetchProjects = (category = "") =>
+  API.get(`/projects${category ? `?category=${category}` : ""}`);
 
-export const sendContactMessage = (payload) => API.post("/contact", payload);
+// Fetch a single project by ID (Required for ProjectDetails.jsx)
+export const fetchProjectById = (id) => API.get(`/projects/${id}`);
 
-export default API;
+// Upload a new project with files
+export const createProject = (projectData) =>
+  API.post("/projects/", projectData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
+// Send contact form message
+export const sendContactMessage = (contactData) =>
+  API.post("/contact/", contactData);

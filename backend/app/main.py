@@ -1,10 +1,12 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.core.database import Base, engine
 from app.routers import projects, contact
+import os
 
-# Initialize database tables
+# Create DB tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -13,7 +15,11 @@ app = FastAPI(
     openapi_url=f"{settings.API_V1_STR}/openapi.json"
 )
 
-# CORS Middleware Setup
+# Ensure static upload path exists & mount static directory
+os.makedirs("static/uploads", exist_ok=True)
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# CORS Setup
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
@@ -31,8 +37,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(projects.router, prefix=settings.API_V1_STR)
-app.include_router(contact.router, prefix=settings.API_V1_STR)
+# Include Routers (Without duplicate prefixes)
+app.include_router(projects.router)
+app.include_router(contact.router)
 
 @app.get("/")
 def root():
