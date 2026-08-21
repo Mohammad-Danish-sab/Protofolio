@@ -78,20 +78,22 @@ export const Skills = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="glass-panel p-8 rounded-2xl border border-gray-800 hover:border-cyan-500/40 transition-all duration-300 bg-"
+                className="bg-[#F5EEDC] p-8 rounded-2xl transition-all duration-300 bg-"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-xl bg-cyan-500/10 text-red-400 border border-cyan-500/20">
+                  <div className="p-3 rounded-xl bg-[#97A26A] text-[#B65950]">
                     <CategoryIcon size={24} />
                   </div>
-                  <h4 className="text-xl font-bold text-white">{cat.title}</h4>
+                  <h4 className="text-xl font-bold text-[#B85C38]">
+                    {cat.title}
+                  </h4>
                 </div>
 
                 <div className="flex flex-wrap gap-2.5">
                   {cat.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3.5 py-1.5 rounded-lg bg-[#B85C38] text-white text-sm font-medium hover:text-black transition-all cursor-default"
+                      className="px-3.5 py-1.5 rounded-lg bg-[#FAF7F8] text-black text-sm font-medium hover:text-black transition-all cursor-default"
                     >
                       {skill}
                     </span>
