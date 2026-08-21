@@ -5,7 +5,6 @@ import { ExternalLink, Github } from "lucide-react";
 export const ProjectCard = ({ project }) => {
   return (
     <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-      {/* Clicking the Image goes to Details */}
       <Link to={`/projects/${project.id}`}>
         <img
           src={`http://localhost:8000${project.image_url}`}
@@ -18,7 +17,6 @@ export const ProjectCard = ({ project }) => {
         {project.category}
       </span>
 
-      {/* Clicking the Title goes to Details */}
       <Link to={`/projects/${project.id}`}>
         <h3 className="text-xl font-bold text-gray-900 mt-1 mb-2 hover:text-[#B95712] transition-colors cursor-pointer">
           {project.title}

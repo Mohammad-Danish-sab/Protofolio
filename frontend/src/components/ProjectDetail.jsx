@@ -26,7 +26,7 @@ export const ProjectDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-gray-500 font-medium">
+      <div className="min-h-screen flex items-center justify-center text-red-500 font-medium">
         Loading project details...
       </div>
     );
@@ -49,19 +49,18 @@ export const ProjectDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 md:px-8">
-      <div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 md:p-10 shadow-lg border border-gray-100">
-        {/* Back Button */}
+    <div className="min-h-screen bg-[#C6D0C7] py-12 px-4 md:px-8">
+      <div className="max-w-4xl mx-auto bg-[#EFEEE4] rounded-3xl p-6 md:p-10 shadow-lg border border-gray-100">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-[#B95712] mb-6 transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-red-600 hover:text-[#B95712] mb-6 transition-colors"
         >
           <ArrowLeft size={18} /> Back to Projects
         </Link>
 
         {/* Title & Category */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-[#B95712]">
             {project.title}
           </h1>
           <span className="px-4 py-1.5 bg-[#B95712]/10 text-[#B95712] font-semibold text-xs rounded-full uppercase tracking-wider">
@@ -69,7 +68,6 @@ export const ProjectDetail = () => {
           </span>
         </div>
 
-        {/* Action Links */}
         <div className="flex items-center gap-4 mb-8">
           {project.github_url && (
             <a
@@ -86,35 +84,33 @@ export const ProjectDetail = () => {
               href={project.live_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[#B95712] text-white text-sm font-medium rounded-xl hover:bg-[#a04a0e] transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[#B65950] text-white text-sm font-medium rounded-xl hover:bg-[#a04a0e] transition-colors"
             >
               <ExternalLink size={16} /> Live Demo
             </a>
           )}
         </div>
 
-        {/* Cover Image */}
         {project.image_url && (
           <div className="rounded-2xl overflow-hidden mb-8 border border-gray-100 shadow-sm">
             <img
               src={`http://localhost:8000${project.image_url}`}
               alt={project.title}
-              className="w-full h-[350px] md:h-[450px] object-cover"
+              className="w-full h-87.5 md:h-112.5 object-cover"
             />
           </div>
         )}
 
-        {/* Technologies Used */}
         {project.technologies && project.technologies.length > 0 && (
           <div className="mb-8">
-            <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <h3 className="text-m font-bold text-red-500 uppercase tracking-wider mb-3 flex items-center gap-2">
               <Layers size={16} /> Technologies Used
             </h3>
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((tech, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1 bg-gray-100 text-gray-800 text-xs font-semibold rounded-lg"
+                  className="px-3 py-1 bg-gray-200 text-gray-800 text-xs font-semibold rounded-lg"
                 >
                   {tech}
                 </span>
@@ -123,9 +119,8 @@ export const ProjectDetail = () => {
           </div>
         )}
 
-        {/* Project Description */}
         <div className="mb-10">
-          <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">
+          <h3 className="text-m font-bold text-red-500 uppercase tracking-wider mb-3">
             About the Project
           </h3>
           <p className="text-gray-700 leading-relaxed text-base whitespace-pre-line">
@@ -133,10 +128,9 @@ export const ProjectDetail = () => {
           </p>
         </div>
 
-        {/* Project Screenshots */}
         {project.screenshots && project.screenshots.length > 0 && (
           <div>
-            <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">
+            <h3 className="text-m font-bold text-red-500 uppercase tracking-wider mb-4">
               Project Screenshots
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

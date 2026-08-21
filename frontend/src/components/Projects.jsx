@@ -42,7 +42,6 @@ export const Projects = () => {
     loadProjects();
   }, [activeCategory]);
 
-  // 🤫 Secret Hotkey: Press Ctrl + Shift + A to open Admin Upload Modal
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.ctrlKey && e.shiftKey && (e.key === "A" || e.key === "a")) {
@@ -54,7 +53,6 @@ export const Projects = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Delete Handler
   const handleDelete = async (e, projectId) => {
     e.stopPropagation();
     e.preventDefault();
@@ -85,7 +83,6 @@ export const Projects = () => {
     }
   };
 
-  // Edit Handler
   const handleEdit = (e, project) => {
     e.stopPropagation();
     e.preventDefault();
@@ -102,7 +99,6 @@ export const Projects = () => {
             </h3>
           </div>
 
-          {/* Admin Upload Button */}
           <button
             onClick={() => setIsAddModalOpen(true)}
             className="flex items-center gap-2 px-4 py-2 bg-[#B95712] text-white rounded-xl text-sm font-medium hover:bg-[#a04a0e] transition-all shadow-sm"
@@ -111,14 +107,12 @@ export const Projects = () => {
           </button>
         </div>
 
-        {/* Add Project Modal */}
         <AddProjectModal
           isOpen={isAddModalOpen}
           onClose={() => setIsAddModalOpen(false)}
           onProjectAdded={loadProjects}
         />
 
-        {/* Edit Project Modal */}
         {editingProject && (
           <EditProjectModal
             isOpen={!!editingProject}
@@ -128,7 +122,6 @@ export const Projects = () => {
           />
         )}
 
-        {/* Category Filters */}
         <div className="flex flex-wrap justify-center md:justify-start gap-3 mb-12">
           {categories.map((cat) => (
             <button
@@ -145,13 +138,12 @@ export const Projects = () => {
           ))}
         </div>
 
-        {/* Projects Grid */}
         {loading ? (
-          <div className="text-center text-gray-600 py-12">
+          <div className="text-center text-red-600 py-12">
             Loading projects...
           </div>
         ) : projects.length === 0 ? (
-          <div className="text-center text-gray-500 py-12">
+          <div className="text-center text-red-500 py-12">
             No projects found in this category.
           </div>
         ) : (
@@ -166,7 +158,7 @@ export const Projects = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col group cursor-pointer relative"
+                  className="bg-[#EFEEE4] rounded-2xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col group cursor-pointer relative"
                 >
                   <Link
                     to={`/projects/${projectId}`}
@@ -190,7 +182,6 @@ export const Projects = () => {
                           </span>
 
                           <div className="flex items-center gap-3 text-gray-600">
-                            {/* Edit & Delete Action Buttons */}
                             <button
                               onClick={(e) => handleEdit(e, project)}
                               title="Edit Project"
@@ -232,10 +223,10 @@ export const Projects = () => {
                           </div>
                         </div>
 
-                        <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#B95712] transition-colors">
+                        <h4 className="text-xl font-bold text-[#B95712] mb-2 group-hover:text-[#B95712] transition-colors">
                           {project.title}
                         </h4>
-                        <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                        <p className="text-gray-800 text-sm leading-relaxed mb-4 line-clamp-3">
                           {project.description}
                         </p>
                       </div>
