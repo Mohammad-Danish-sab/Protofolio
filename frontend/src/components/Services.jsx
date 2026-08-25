@@ -34,9 +34,6 @@ export const Services = () => {
     <section id="services" className="py-24 relative bg-[#faf9f7]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          {/* <h2 className="text-xs font-semibold text-cyan-400 uppercase tracking-widest mb-3">
-            Offerings
-          </h2> */}
           <h3 className="text-3xl md:text-5xl font-bold text-[#B65950]">
             Services & Capabilities
           </h3>
@@ -52,15 +49,15 @@ export const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass-panel p-8 rounded-2xl border border-gray-800 hover:border-violet-500/50 transition-all duration-300 group hover:-translate-y-1"
+                className="bg-[#e4e5e6] p-8 rounded-2xl transition-all duration-300 group hover:-translate-y-1"
               >
-                <div className="p-4 rounded-xl bg-linear-to-br from-cyan-500/10 to-violet-500/10 text-red-500 border border-cyan-500/20 w-fit mb-6 group-hover:scale-110 transition-transform">
+                <div className="p-4 rounded-xl text-red-500 bg-[#e4e8d1] w-fit mb-6 group-hover:scale-110 transition-transform">
                   <ServiceIcon size={26} />
                 </div>
-                <h4 className="text-xl font-bold text-white mb-3">
+                <h4 className="text-xl font-bold text-[#B95712] mb-3">
                   {service.title}
                 </h4>
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <p className="text-gray-600 text-sm leading-relaxed">
                   {service.description}
                 </p>
               </motion.div>
