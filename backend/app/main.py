@@ -1,12 +1,16 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from app.core.config import settings
-from app.core.database import Base, engine
-from app.routers import projects, contact
 import os
 
-# Create DB tables
+from app.core.config import settings
+from app.core.database import Base, engine
+
+# Import model modules directly to register schemas in Base.metadata
+from app.models import project, contact, skill 
+from app.routers import projects, contact as contact_router, skills 
+
+# Creates 'skills' and all other registered tables in PostgreSQL
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -15,11 +19,9 @@ app = FastAPI(
     openapi_url=f"{settings.API_V1_STR}/openapi.json"
 )
 
-# Ensure static upload path exists & mount static directory
 os.makedirs("static/uploads", exist_ok=True)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# CORS Setup
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
@@ -37,9 +39,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include Routers (Without duplicate prefixes)
 app.include_router(projects.router)
-app.include_router(contact.router)
+app.include_router(contact_router.router)
+app.include_router(skills.router, prefix=f"{settings.API_V1_STR}/skills", tags=["skills"])
 
 @app.get("/")
 def root():

@@ -10,17 +10,44 @@ const API = axios.create({
 export const fetchProjects = (category = "") =>
   API.get(`/projects${category ? `?category=${category}` : ""}`);
 
-// Fetch a single project by ID (Required for ProjectDetails.jsx)
+// Fetch a single project by ID
 export const fetchProjectById = (id) => API.get(`/projects/${id}`);
-
-// Upload a new project with files
-export const createProject = (projectData) =>
-  API.post("/projects/", projectData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
 
 // Send contact form message
 export const sendContactMessage = (contactData) =>
   API.post("/contact/", contactData);
+
+// ---------------- ADMIN PROTECTED APIS ---------------- //
+
+// Upload a new project with files (Pass adminKey from form state)
+export const createProject = (projectData, adminKey) =>
+  API.post("/projects/", projectData, {
+    headers: {
+      "admin-key": adminKey,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
+// Fetch all skills
+export const fetchSkills = () => API.get("/skills/");
+
+// Create skill (Pass adminKey from form state)
+export const createSkill = (skillData, adminKey) =>
+  API.post("/skills/", skillData, {
+    headers: {
+      "admin-key": adminKey,
+    },
+  });
+
+// Delete skill (Pass adminKey from form state)
+export const deleteSkill = (id, adminKey) => {
+  if (!id) {
+    console.error("deleteSkill error: No valid skill ID provided.");
+    return Promise.reject(new Error("Missing skill ID"));
+  }
+  return API.delete(`/skills/${id}`, {
+    headers: {
+      "admin-key": adminKey,
+    },
+  });
+};

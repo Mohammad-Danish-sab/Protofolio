@@ -3,9 +3,7 @@ import { X, Upload, Lock } from "lucide-react";
 import { createProject } from "../services/api";
 
 export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
-  const [adminKey, setAdminKey] = useState(
-    import.meta.env.VITE_ADMIN_SECRET_KEY || "",
-  );
+  const [adminKey, setAdminKey] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("Full Stack");
@@ -26,12 +24,9 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
 
     try {
       const formData = new FormData();
-      formData.append("admin_key", adminKey);
       formData.append("title", title);
       formData.append("description", description);
       formData.append("category", category);
-
-      // Pass the raw string directly; the backend will parse it into a Python list
       formData.append("technologies", technologies);
 
       if (githubUrl) formData.append("github_url", githubUrl);
@@ -42,13 +37,23 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
         formData.append("screenshots", file);
       });
 
-      await createProject(formData);
+      await createProject(formData, adminKey);
+
+      setAdminKey("");
+      setTitle("");
+      setDescription("");
+      setTechnologies("");
+      setGithubUrl("");
+      setLiveUrl("");
+      setCoverFile(null);
+      setScreenshotFiles([]);
+
       onProjectAdded();
       onClose();
     } catch (err) {
       console.error("Upload Error:", err);
       if (err.response?.status === 401) {
-        setErrorMsg("Galat Admin Passcode! Inaccessible for non-admins.");
+        setErrorMsg("Invalid Admin Passcode! Inaccessible for non-admins.");
       } else {
         setErrorMsg("Failed to upload. Please check backend connection.");
       }
@@ -58,11 +63,11 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto text-red-700">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto text-red-400">
       <div className="bg-white rounded-3xl p-6 md:p-8 w-full max-w-xl shadow-2xl my-8 relative">
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 text-red-900 hover:text-red-700"
+          className="absolute top-6 right-6 text-gray-500 hover:text-gray-700"
         >
           <X size={20} />
         </button>
@@ -85,7 +90,7 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
             <input
               type="password"
               required
-              placeholder="Default: admin123"
+              placeholder="Enter your security passcode"
               className="w-full p-3 border border-gray-200 rounded-xl text-sm outline-none focus:border-[#B95712] bg-gray-50 font-medium placeholder-gray-400"
               value={adminKey}
               onChange={(e) => setAdminKey(e.target.value)}
