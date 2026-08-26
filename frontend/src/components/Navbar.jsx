@@ -25,7 +25,7 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "py-3 glass-panel shadow-lg" : "py-6 bg-[#BFD9D5] "}`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "py-3 shadow-lg" : "py-6 bg-[#BFD9D5] "}`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <a
@@ -86,7 +86,7 @@ export const Navbar = () => {
           <a
             href="#contact"
             onClick={() => setMobileMenuOpen(false)}
-            className="mt-2 text-center py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-cyan-500 to-violet-600"
+            className="mt-2 text-center py-3 rounded-xl font-semibold text-white bg-linear-to-r from-cyan-500 to-violet-600"
           >
             Let's Talk
           </a>
