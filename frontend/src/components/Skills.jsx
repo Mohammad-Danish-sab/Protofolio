@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Layout, Server, Cpu, Database, Plus, Trash2, X } from "lucide-react";
+
 import { fetchSkills, createSkill, deleteSkill } from "../services/api";
 
 const defaultCategories = [
@@ -32,7 +33,7 @@ const defaultCategories = [
   {
     title: "AI / Gen AI",
     icon: Cpu,
-    skills: ["NumPy", "Pandas", "RAG", "LLM", "Lang Chain", "Lang Graph"],
+    skills: ["NumPy", "Pandas", "RAG", "LLM", "LangChain", "LangGraph"],
   },
   {
     title: "Database & Tools",
@@ -40,11 +41,11 @@ const defaultCategories = [
     skills: [
       "PostgreSQL",
       "MySQL",
+      "MongoDB",
       "Redis",
       "Docker",
       "Git & GitHub",
       "VS Code",
-      "Canva",
     ],
   },
 ];
@@ -56,8 +57,17 @@ const categoryIcons = {
   "Database & Tools": Database,
 };
 
+
+const categoryOrder = [
+  "Frontend",
+  "Backend",
+  "AI / Gen AI",
+  "Database & Tools",
+];
+
 export const Skills = () => {
   const [skillCategories, setSkillCategories] = useState(defaultCategories);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("Frontend");
@@ -71,40 +81,78 @@ export const Skills = () => {
   const loadDynamicSkills = async () => {
     try {
       const response = await fetchSkills();
-      const rawSkills = response.data;
+      const rawSkills = response?.data;
 
-      if (rawSkills && rawSkills.length > 0) {
+      if (Array.isArray(rawSkills) && rawSkills.length > 0) {
         const groupedMap = rawSkills.reduce((acc, curr) => {
           const cat = curr.category || "Database & Tools";
-          if (!acc[cat]) acc[cat] = [];
-          acc[cat].push({ id: curr.id, name: curr.name });
+
+          if (!acc[cat]) {
+            acc[cat] = [];
+          }
+
+          acc[cat].push({
+            id: curr.id,
+            name: curr.name,
+          });
+
           return acc;
         }, {});
 
-        const formattedCategories = Object.keys(groupedMap).map((catName) => ({
-          title: catName,
-          icon: categoryIcons[catName] || Database,
-          skills: groupedMap[catName],
-        }));
+        const formattedCategories = Object.keys(groupedMap)
+          .sort((a, b) => {
+            const ai = categoryOrder.indexOf(a);
+            const bi = categoryOrder.indexOf(b);
+
+            if (ai === -1 && bi === -1) return 0;
+            if (ai === -1) return 1;
+            if (bi === -1) return -1;
+
+            return ai - bi;
+          })
+          .map((catName) => ({
+            title: catName,
+            icon: categoryIcons[catName] || Database,
+            skills: groupedMap[catName],
+          }));
 
         setSkillCategories(formattedCategories);
       }
     } catch (err) {
-      console.warn("Using default static skills due to API fetch state:", err);
+      console.warn(
+        "Using default static skills because API is unavailable:",
+        err,
+      );
     }
   };
 
   const handleAddSkill = async (e) => {
     e.preventDefault();
+
+    if (!name.trim() || !adminKey.trim()) {
+      return;
+    }
+
     setLoading(true);
 
     try {
-      await createSkill({ name, category }, adminKey);
+      await createSkill(
+        {
+          name: name.trim(),
+          category,
+        },
+        adminKey,
+      );
+
       setName("");
-      setAdminKey(""); 
+      setAdminKey("");
+      setCategory("Frontend");
       setIsModalOpen(false);
-      loadDynamicSkills();
+
+      await loadDynamicSkills();
     } catch (err) {
+      console.error(err);
+
       alert("Failed to add skill. Please verify your admin key.");
     } finally {
       setLoading(false);
@@ -113,79 +161,118 @@ export const Skills = () => {
 
   const handleDeleteSkill = async (id) => {
     if (!id) return;
+
     const key = prompt("Enter Admin Key to delete this skill:");
+
     if (!key) return;
 
     try {
       await deleteSkill(id, key);
-      loadDynamicSkills();
+      await loadDynamicSkills();
     } catch (err) {
+      console.error(err);
+
       alert("Failed to delete skill. Invalid admin key.");
     }
   };
 
   return (
-    <section id="skills" className="py-24 relative bg-[#faf9f7]">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto mb-16 relative">
-          <h3 className="text-3xl md:text-5xl font-bold text-[#B65950]">
-            Technical Skills
-          </h3>
+    <section
+      id="skills"
+      className="relative overflow-hidden bg-[#faf9f7] py-24"
+    >
+      <div className="pointer-events-none absolute -left-32 top-20 h-72 w-72 rounded-full bg-[#B65950]/5 blur-3xl" />
+
+      <div className="pointer-events-none absolute -right-32 bottom-10 h-80 w-80 rounded-full bg-[#B85C38]/5 blur-3xl" />
+
+      <div className="relative mx-auto max-w-7xl px-6">
+        {" "}
+        <div className="flex items-center justify-between mb-12">
+          {" "}
+          <h3 className="text-3xl md:text-5xl font-bold text-[#B95712]">
+            Technical Skills{" "}
+          </h3>{" "}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="absolute right-0 top-1/2 -translate-y-1/2 p-2.5 bg-[#B95712] text-[#white] hover:text-white rounded-xl transition-all shadow-sm"
-            title="Add Skill"
+            className="flex items-center gap-2 px-4 py-2 bg-[#B95712] text-white rounded-xl text-sm font-medium hover:bg-[#a04a0e] transition-all shadow-sm"
           >
-            <Plus size={15} />
-          </button>
+            <Plus size={16} /> Add Skill{" "}
+          </button>{" "}
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-7 md:grid-cols-2">
           {skillCategories.map((cat, idx) => {
             const CategoryIcon = cat.icon;
+
             return (
               <motion.div
                 key={cat.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="bg-[#e4e5e6] p-8 rounded-2xl transition-all duration-300"
+                initial={{
+                  opacity: 0,
+                  y: 30,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.2,
+                }}
+                transition={{
+                  duration: 0.5,
+                  delay: idx * 0.1,
+                }}
+                className="group relative overflow-hidden rounded-3xl border border-black/5 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:p-8"
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-xl bg-[#DEDBD4] text-[#B65950]">
-                    <CategoryIcon size={24} />
+                <div className="absolute left-0 top-0 h-1 w-full bg-linear-to-r from-[#B65950] to-[#D69A7A] opacity-70" />
+
+                <div className="mb-7 flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#B65950]/10 text-[#B65950] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#B65950] group-hover:text-white">
+                      <CategoryIcon size={23} />
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-bold text-[#B65950]">
+                        {cat.title}
+                      </h3>
+
+                      <p className="mt-1 text-xs font-medium uppercase tracking-wider text-gray-400">
+                        {cat.skills.length} Technologies
+                      </p>
+                    </div>
                   </div>
-                  <h4 className="text-xl font-bold text-[#B85C38]">
-                    {cat.title}
-                  </h4>
                 </div>
 
                 <div className="flex flex-wrap gap-2.5">
-                  {cat.skills.map((skillItem) => {
+                  {cat.skills.map((skillItem, skillIndex) => {
                     const skillName =
                       typeof skillItem === "string"
                         ? skillItem
                         : skillItem.name;
+
                     const skillId =
                       typeof skillItem === "object" ? skillItem.id : null;
 
                     return (
-                      <span
-                        key={skillName}
-                        className="group relative px-3.5 py-1.5 rounded-lg bg-[#FAF7F8] text-black text-sm font-medium transition-all cursor-default flex items-center gap-2"
+                      <motion.div
+                        key={`${cat.title}-${skillName}-${skillIndex}`}
+                        whileHover={{ scale: 1.05 }}
+                        className="group/skill inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-[#faf9f7] px-3.5 py-2 text-sm font-medium text-gray-700 transition-all duration-200 hover:border-[#B65950]/30 hover:bg-[#B65950]/5 hover:text-[#B65950]"
                       >
-                        {skillName}
+                        <span>{skillName}</span>
+
                         {skillId && (
                           <button
+                            type="button"
                             onClick={() => handleDeleteSkill(skillId)}
-                            className="hidden group-hover:inline-block text-red-500 hover:text-red-700 transition-colors"
+                            className="text-gray-400 opacity-0 transition-all duration-200 hover:text-red-500 group-hover/skill:opacity-100"
                             title="Delete skill"
                           >
                             <Trash2 size={13} />
                           </button>
                         )}
-                      </span>
+                      </motion.div>
                     );
                   })}
                 </div>
@@ -196,80 +283,118 @@ export const Skills = () => {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-[#FAF7F8] border border-[#F5EEDC] p-6 md:p-8 rounded-2xl w-full max-w-md shadow-2xl relative">
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-black"
-            >
-              <X size={20} />
-            </button>
-            <h4 className="text-2xl font-bold text-[#B85C38] mb-6">
-              Add New Skill
-            </h4>
-            <form onSubmit={handleAddSkill} className="space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+          <motion.div
+            initial={{
+              opacity: 0,
+              scale: 0.95,
+              y: 20,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.25,
+            }}
+            className="relative w-full max-w-md overflow-hidden rounded-3xl border border-white/20 bg-[#FAF7F8] shadow-2xl"
+          >
+            <div className="bg-[#B65950] px-6 py-6 text-white">
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                className="absolute right-4 top-4 rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                aria-label="Close"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="flex items-center gap-3">
+                <div className="rounded-xl bg-white/10 p-2.5">
+                  <Plus size={20} />
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold">Add New Skill</h3>
+
+                  <p className="mt-1 text-sm text-white/70">
+                    Add a technology to your portfolio
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <form onSubmit={handleAddSkill} className="space-y-5 p-6 md:p-7">
               <div>
-                <label className="block text-xs font-semibold text-gray-600 uppercase mb-1">
+                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-gray-600">
                   Skill Name
                 </label>
+
                 <input
                   type="text"
                   placeholder="e.g. Next.js"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full p-3 bg-white border border-gray-200 rounded-xl text-black focus:outline-none focus:border-[#B85C38]"
+                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-black outline-none transition-all placeholder:text-gray-400 focus:border-[#B65950] focus:ring-4 focus:ring-[#B65950]/10"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-600 uppercase mb-1">
+                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-gray-600">
                   Category
                 </label>
+
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full p-3 bg-white border border-gray-200 rounded-xl text-black focus:outline-none focus:border-[#B85C38]"
+                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-black outline-none transition-all focus:border-[#B65950] focus:ring-4 focus:ring-[#B65950]/10"
                 >
                   <option value="Frontend">Frontend</option>
+
                   <option value="Backend">Backend</option>
+
                   <option value="AI / Gen AI">AI / Gen AI</option>
+
                   <option value="Database & Tools">Database & Tools</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-600 uppercase mb-1">
+                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-gray-600">
                   Admin Key
                 </label>
+
                 <input
                   type="password"
                   placeholder="Enter secret admin key"
                   value={adminKey}
                   onChange={(e) => setAdminKey(e.target.value)}
-                  className="w-full p-3 bg-white border border-gray-200 rounded-xl text-black focus:outline-none focus:border-[#B85C38]"
+                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-black outline-none transition-all placeholder:text-gray-400 focus:border-[#B65950] focus:ring-4 focus:ring-[#B65950]/10"
                   required
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-4">
+              <div className="flex gap-3 border-t border-gray-200 pt-5">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-gray-200 text-gray-700 font-medium rounded-xl hover:bg-gray-300 transition-colors text-sm"
+                  className="flex-1 rounded-xl bg-gray-100 px-4 py-3 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-200"
                 >
                   Cancel
                 </button>
+
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-5 py-2 bg-[#B85C38] text-white font-medium rounded-xl hover:bg-[#a04e2e] transition-colors text-sm shadow-md disabled:opacity-50"
+                  className="flex-1 rounded-xl bg-[#B65950] px-4 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#a44e46] hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {loading ? "Saving..." : "Save Skill"}
                 </button>
               </div>
             </form>
-          </div>
+          </motion.div>
         </div>
       )}
     </section>

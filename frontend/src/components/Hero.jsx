@@ -82,7 +82,7 @@ export const Hero = () => {
     def __init__(self):
         self.name = "CodeWith_Danish"
         self.role = "Full Stack & AI Engineer"
-        self.stack = ["React", "FastAPI", "PyTorch"]
+        self.stack = ["React", "FastAPI", "Python"]
         
     def status(self):
         return "Ready to build innovative systems."

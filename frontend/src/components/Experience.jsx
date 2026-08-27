@@ -2,32 +2,92 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Calendar, Building2 } from "lucide-react";
 
+
 const experiences = [
   {
     period: "2026 - Present",
-    role: "AI & Full Stack Developer",
+    role: "AI Engineering",
     company: "",
     description:
-      "Architecting end-to-end computer vision platforms and FastAPI backends for real-time analytics.",
-    technologies: ["React", "FastAPI", "Pandas", "PostgreSQL", "Docker"],
+      "Expanding into AI engineering by integrating LLMs, RAG, intelligent automation, and AI-powered features into modern full-stack applications.",
+    technologies: [
+      "Python",
+      "LLMs",
+      "RAG",
+      "LangChain",
+      "FastAPI",
+      "React",
+      "Docker",
+    ],
   },
+
   {
     period: "2025 - 2026",
-    role: "Full Stack Developer",
+    role: "Full Stack Development",
     company: "",
     description:
-      "Developed automated workflow systems and high-throughput REST APIs handling thousands of daily queries.",
-    technologies: ["Python", "FastAPI", "React", "Redis"],
+      "Combining frontend and backend expertise to build complete applications with REST APIs, authentication, database integration, responsive interfaces, and containerized environments.",
+    technologies: [
+      "React",
+      "FastAPI",
+      "Node.js",
+      "MySQL",
+      "MongoDB",
+      "SQLAlchemy",
+      "Docker",
+    ],
   },
+
   {
     period: "2024 - 2025",
-    role: "Junior Full Stack Developer",
+    role: "Backend Development",
     company: "",
     description:
-      "Built responsive web dashboards and implemented core database operations using SQLAlchemy.",
-    technologies: ["JavaScript", "React", "Python", "MySQL"],
+      "Developing server-side applications by building REST APIs, implementing authentication, managing databases, and designing reliable backend systems.",
+    technologies: [
+      "Node.js",
+      "Express.js",
+      "Python",
+      "FastAPI",
+      "MongoDB",
+      "MySQL",
+    ],
+  },
+
+  {
+    period: "2024",
+    role: "Frontend Development",
+    company: "",
+    description:
+      "Building responsive and interactive web interfaces while learning component-based architecture, modern UI development, and user-focused design.",
+    technologies: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Tailwind CSS",
+      "Vite",
+    ],
+  },
+
+  {
+    period: "2023 - 2024",
+    role: "Programming",
+    company: "",
+    description:
+      "Built a strong foundation in programming and problem-solving through core programming concepts, object-oriented programming, data structures, algorithms, and development fundamentals.",
+    technologies: [
+      "C++",
+      "Data Structures",
+      "Algorithms",
+      "OOP",
+      "Git",
+      "GitHub",
+    ],
   },
 ];
+
+
 
 export const Experience = () => {
   return (

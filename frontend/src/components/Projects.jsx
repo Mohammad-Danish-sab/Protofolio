@@ -158,7 +158,7 @@ export const Projects = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  className="bg-[#EFEEE4] rounded-2xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col group cursor-pointer relative"
+                  className="bg-white rounded-2xl shadow-m overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col group cursor-pointer relative"
                 >
                   <Link
                     to={`/projects/${projectId}`}
