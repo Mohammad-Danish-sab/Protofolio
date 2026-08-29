@@ -31,7 +31,10 @@ const services = [
 
 export const Services = () => {
   return (
-    <section id="services" className="py-24 relative bg-[#faf9f7]">
+    <section
+      id="services"
+      className="py-24 relative bg-[#faf9f7]"
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h3 className="text-3xl md:text-5xl font-bold text-[#B65950]">
@@ -42,21 +45,30 @@ export const Services = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => {
             const ServiceIcon = service.icon;
+
             return (
               <motion.div
                 key={service.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-[#e4e5e6] p-8 rounded-2xl transition-all duration-300 group hover:-translate-y-1"
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.1,
+                }}
+                className="relative overflow-hidden bg-white p-8 rounded-2xl transition-all duration-300 group hover:-translate-y-1"
               >
-                <div className="p-4 rounded-xl text-red-500 bg-[#e4e8d1] w-fit mb-6 group-hover:scale-110 transition-transform">
+                {/* Top Border */}
+                <div className="absolute left-0 top-0 h-1 w-full bg-linear-to-r from-[#B65950] to-[#D69A7A] opacity-70" />
+
+                <div className="p-4 rounded-xl text-[#B65950] bg-[#B65950]/10 w-fit mb-6 group-hover:scale-110 transition-transform">
                   <ServiceIcon size={26} />
                 </div>
+
                 <h4 className="text-xl font-bold text-[#B95712] mb-3">
                   {service.title}
                 </h4>
+
                 <p className="text-gray-600 text-sm leading-relaxed">
                   {service.description}
                 </p>
@@ -68,3 +80,4 @@ export const Services = () => {
     </section>
   );
 };
+

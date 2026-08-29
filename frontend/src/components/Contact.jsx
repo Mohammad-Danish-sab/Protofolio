@@ -53,7 +53,7 @@ export const Contact = () => {
           </div>
 
           <div className="lg:col-span-7">
-            <form onSubmit={handleSubmit} className="bg-[#E5D3B3] p-8 rounded-2xl space-y-6">
+            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl space-y-6">
               {status.success && (
                 <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center gap-3">
                   <CheckCircle size={20} />
@@ -69,7 +69,7 @@ export const Contact = () => {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#e4e8d1] text-black focus:outline-none focus:border-cyan-500 transition-colors"
+                    className="w-full px-4 py-3 rounded-xl bg-[#e4e5e6] text-black focus:outline-none focus:border-cyan-500 transition-colors"
                     placeholder="Enter Your Name"
                   />
                 </div>
@@ -80,8 +80,8 @@ export const Contact = () => {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#e4e8d1] text-black focus:outline-none focus:border-cyan-500 transition-colors"
-                    placeholder="jane@example.com"
+                    className="w-full px-4 py-3 rounded-xl bg-[#e4e5e6] text-black focus:outline-none focus:border-cyan-500 transition-colors"
+                    placeholder="email@.com"
                   />
                 </div>
               </div>
@@ -93,7 +93,7 @@ export const Contact = () => {
                   required
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-[#e4e8d1] text-gray-600 focus:outline-none focus:border-cyan-500 transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-[#e4e5e6] text-gray-600 focus:outline-none focus:border-cyan-500 transition-colors"
                   placeholder="System Architecture Consultation"
                 />
               </div>
@@ -105,7 +105,7 @@ export const Contact = () => {
                   required
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-[#e4e8d1] text-gray-600 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-[#e4e5e6] text-gray-600 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
                   placeholder="Outline your project scope or opportunity..."
                 />
               </div>
