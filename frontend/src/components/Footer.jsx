@@ -8,7 +8,7 @@ export const Footer = () => {
   const navLinks = [
     { name: "Projects", href: "#projects" },
     { name: "About", href: "#about" },
-    { name: "Blog", href: "#blog" },
+    { name: "Experience", href: "#experience" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -31,27 +31,24 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="border-t border-slate-800/80 bg-[#030712] text-slate-400">
+    <footer className=" bg-[#0E0E0E] text-slate-400">
       <div className="max-w-7xl mx-auto px-6 pt-12 pb-8">
-        {/* Main Content Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-slate-800/60">
-          {/* Brand Info */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="p-2.5 rounded-xl bg-gradient-to-tr from-cyan-500 to-violet-600 text-slate-950 font-bold shadow-lg shadow-cyan-500/10">
+              <div className="p-2.5 rounded-xl bg-[#e6e5e4] text-slate-950 font-bold shadow-lg shadow-cyan-500/10">
                 <Code2 size={20} className="stroke-[2.5]" />
               </div>
-              <span className="font-bold text-lg text-white tracking-wide">
-                CodeWith<span className="text-cyan-400">Danish</span>
+              <span className="font-bold text-lg text-[#B95712]">
+                CodeWith<span className="text-[#B95712]">Danish</span>
               </span>
             </div>
-            <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
+            <p className="text-m text-slate-400 max-w-sm leading-relaxed">
               Building scalable web applications, sharing insights on modern
-              frontend development, and writing clean Python backends.
+              frontend development, and writing clean Code.
             </p>
           </div>
 
-          {/* Quick Links */}
           <div className="md:col-span-3 space-y-3">
             <h3 className="text-xs font-semibold text-slate-200 tracking-wider uppercase">
               Navigation

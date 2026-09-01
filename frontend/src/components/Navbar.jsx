@@ -32,7 +32,7 @@ export const Navbar = () => {
           href="#home"
           className="flex items-center gap-2 text-xl font-bold tracking-wider group"
         >
-          <div className="p-2 rounded-lg bg-[#CABFDF] text-black font-extrabold">
+          <div className="p-2 rounded-lg bg-[#e6e5e4] text-black font-extrabold">
             <Code2 size={20} />
           </div>
           <span className="bg-[#B85C38] bg-clip-text text-transparent font-bold text-2xl">
