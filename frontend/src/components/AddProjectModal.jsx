@@ -24,21 +24,24 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
 
     try {
       const formData = new FormData();
-      formData.append("title", title);
-      formData.append("description", description);
+      formData.append("title", title.trim());
+      formData.append("description", description.trim());
       formData.append("category", category);
-      formData.append("technologies", technologies);
+      formData.append("technologies", technologies.trim());
 
-      if (githubUrl) formData.append("github_url", githubUrl);
-      if (liveUrl) formData.append("live_url", liveUrl);
+      if (githubUrl.trim()) formData.append("github_url", githubUrl.trim());
+      if (liveUrl.trim()) formData.append("live_url", liveUrl.trim());
       if (coverFile) formData.append("image", coverFile);
 
-      screenshotFiles.forEach((file) => {
-        formData.append("screenshots", file);
-      });
+      if (screenshotFiles.length > 0) {
+        screenshotFiles.forEach((file) => {
+          formData.append("screenshots", file);
+        });
+      }
 
       await createProject(formData, adminKey);
 
+      // Reset state on success
       setAdminKey("");
       setTitle("");
       setDescription("");
@@ -54,6 +57,10 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
       console.error("Upload Error:", err);
       if (err.response?.status === 401) {
         setErrorMsg("Invalid Admin Passcode! Inaccessible for non-admins.");
+      } else if (err.response?.status === 422) {
+        setErrorMsg(
+          "Validation error: Please ensure all required fields are filled.",
+        );
       } else {
         setErrorMsg("Failed to upload. Please check backend connection.");
       }
@@ -63,8 +70,8 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto text-red-400">
-      <div className="bg-white rounded-3xl p-6 md:p-8 w-full max-w-xl shadow-2xl my-8 relative">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto">
+      <div className="bg-white rounded-3xl p-6 md:p-8 w-full max-w-xl shadow-2xl my-8 relative text-gray-800">
         <button
           onClick={onClose}
           className="absolute top-6 right-6 text-gray-500 hover:text-gray-700"
@@ -163,7 +170,7 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
               type="file"
               accept="image/*"
               className="w-full p-2 border border-gray-200 rounded-xl text-sm text-gray-600"
-              onChange={(e) => setCoverFile(e.target.files[0])}
+              onChange={(e) => setCoverFile(e.target.files[0] || null)}
             />
           </div>
 
@@ -176,7 +183,9 @@ export const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
               accept="image/*"
               multiple
               className="w-full p-2 border border-gray-200 rounded-xl text-sm text-gray-600"
-              onChange={(e) => setScreenshotFiles(Array.from(e.target.files))}
+              onChange={(e) =>
+                setScreenshotFiles(Array.from(e.target.files || []))
+              }
             />
           </div>
 

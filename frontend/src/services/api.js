@@ -23,7 +23,7 @@ export const sendContactMessage = (contactData) =>
 export const createProject = (projectData, adminKey) =>
   API.post("/projects/", projectData, {
     headers: {
-      "admin-key": adminKey,
+      "x-admin-key": adminKey, // 🟢 Updated to match FastAPI alias
       "Content-Type": "multipart/form-data",
     },
   });
@@ -35,7 +35,7 @@ export const fetchSkills = () => API.get("/skills/");
 export const createSkill = (skillData, adminKey) =>
   API.post("/skills/", skillData, {
     headers: {
-      "admin-key": adminKey,
+      "x-admin-key": adminKey, // 🟢 Updated to match FastAPI alias
     },
   });
 
@@ -47,7 +47,7 @@ export const deleteSkill = (id, adminKey) => {
   }
   return API.delete(`/skills/${id}`, {
     headers: {
-      "admin-key": adminKey,
+      "x-admin-key": adminKey, // 🟢 Updated to match FastAPI alias
     },
   });
 };

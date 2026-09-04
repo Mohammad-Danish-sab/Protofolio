@@ -4,7 +4,7 @@ import shutil
 import uuid
 from typing import List, Optional
 
-from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
+from fastapi import APIRouter, Depends, File, Form, Header, HTTPException, UploadFile, status
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
@@ -42,7 +42,6 @@ def parse_technologies(technologies_input: str) -> List[str]:
     if not technologies_input:
         return []
 
-    # Attempt to parse as JSON first
     try:
         parsed = json.loads(technologies_input)
         if isinstance(parsed, list):
@@ -50,7 +49,6 @@ def parse_technologies(technologies_input: str) -> List[str]:
     except (json.JSONDecodeError, TypeError):
         pass
 
-    # Fallback to comma-separated string parsing
     return [t.strip() for t in str(technologies_input).split(",") if t.strip()]
 
 
@@ -84,7 +82,6 @@ def get_project_by_id(project_id: int, db: Session = Depends(get_db)):
     "/", response_model=ProjectResponse, status_code=status.HTTP_201_CREATED
 )
 async def create_project(
-    admin_key: str = Form(...),
     title: str = Form(...),
     description: str = Form(...),
     category: str = Form(...),
@@ -93,9 +90,10 @@ async def create_project(
     live_url: Optional[str] = Form(None),
     image: Optional[UploadFile] = File(None),
     screenshots: List[UploadFile] = File(default=[]),
+    x_admin_key: str = Header(..., alias="x-admin-key"),  # 🟢 Read from header
     db: Session = Depends(get_db),
 ):
-    verify_admin_key(admin_key)
+    verify_admin_key(x_admin_key)
 
     tech_list = parse_technologies(technologies)
     image_url = save_file(image) if image and image.filename else None
@@ -107,11 +105,11 @@ async def create_project(
         title=title,
         description=description,
         category=category,
-        technologies=tech_list,  # Passes native Python list
+        technologies=tech_list,
         github_url=github_url,
         live_url=live_url,
         image_url=image_url,
-        screenshots=screenshot_urls,  # Passes native Python list
+        screenshots=screenshot_urls,
     )
 
     db.add(db_project)
@@ -123,7 +121,6 @@ async def create_project(
 @router.put("/{project_id}", response_model=ProjectResponse)
 async def update_project(
     project_id: int,
-    admin_key: str = Form(...),
     title: str = Form(...),
     description: str = Form(...),
     category: str = Form(...),
@@ -132,9 +129,10 @@ async def update_project(
     live_url: Optional[str] = Form(None),
     image: Optional[UploadFile] = File(None),
     screenshots: List[UploadFile] = File(default=[]),
+    x_admin_key: str = Header(..., alias="x-admin-key"),  # 🟢 Read from header
     db: Session = Depends(get_db),
 ):
-    verify_admin_key(admin_key)
+    verify_admin_key(x_admin_key)
 
     project = db.query(Project).filter(Project.id == project_id).first()
     if not project:
@@ -166,10 +164,10 @@ async def update_project(
 @router.delete("/{project_id}", status_code=status.HTTP_200_OK)
 def delete_project(
     project_id: int,
-    admin_key: str = Form(...),
+    x_admin_key: str = Header(..., alias="x-admin-key"),  # 🟢 Read from header
     db: Session = Depends(get_db),
 ):
-    verify_admin_key(admin_key)
+    verify_admin_key(x_admin_key)
 
     project = db.query(Project).filter(Project.id == project_id).first()
     if not project:
